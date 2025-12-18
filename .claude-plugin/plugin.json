@@ -9,6 +9,5 @@
   "homepage": "https://github.com/scarrillo/changelog",
   "repository": "https://github.com/scarrillo/changelog",
   "license": "MIT",
-  "keywords": ["release", "changelog", "documentation", "testflight", "ios", "claude-code"],
-  "category": "productivity"
+  "keywords": ["release", "changelog", "documentation", "testflight", "ios", "claude-code"]
 }
