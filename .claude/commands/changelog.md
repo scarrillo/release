@@ -113,4 +113,41 @@ Once the changelog is complete, ask the user about follow-up documentation:
 
 ## Arguments
 
-If a version number or date range is provided as an argument, scope the changelog to that specific version or time period: $ARGUMENTS
+$ARGUMENTS
+
+**Version/date range**: Scope changelog to specific version or time period
+- `/changelog v1.2.0`
+- `/changelog 2024-01-01`
+
+**Follow-up behavior flags**:
+- `--auto` - Automatically run both /decisions and /whattotest without asking
+- `--ask` - Ask before running each follow-up (default)
+- `--skip` - Skip all follow-ups, only generate changelog
+- `--decisions` - Auto-run /decisions only
+- `--whattotest` - Auto-run /whattotest only
+- `--no-decisions` - Skip /decisions prompt
+- `--no-whattotest` - Skip /whattotest prompt
+
+**Examples**:
+- `/changelog --auto` - Generate all docs without prompts
+- `/changelog --skip` - Only changelog, no follow-ups
+- `/changelog v1.2.0 --decisions --no-whattotest` - Version 1.2.0, auto-run decisions, skip whattotest
+
+## Configuration File
+
+Check for `.claude/config.json` at project root for persistent defaults:
+
+```json
+{
+  "changelog": {
+    "followUp": {
+      "decisions": "ask",
+      "whattotest": "ask"
+    }
+  }
+}
+```
+
+**Options**: `"always"` | `"ask"` | `"never"`
+
+Command-line arguments override config file settings.

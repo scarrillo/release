@@ -1,0 +1,10 @@
+{
+  "name": "release-docs",
+  "version": "1.0.0",
+  "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
+  "author": {
+    "name": "LogicPhase"
+  },
+  "keywords": ["release", "changelog", "documentation", "testflight", "ios"],
+  "category": "productivity"
+}
