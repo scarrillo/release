@@ -147,19 +147,41 @@ $ARGUMENTS
 
 ## Configuration File
 
-Check for `.claude/config.json` at project root for persistent defaults:
+Check for `.claude/config.json` at project root. Look for settings under the **`changelog-plugin`** namespace:
 
 ```json
 {
-  "changelog": {
-    "followUp": {
-      "decisions": "ask",
-      "whattotest": "ask"
+  "changelog-plugin": {
+    "changelog": {
+      "outputPath": "./changelog.md",
+      "followUp": {
+        "decisions": "ask",
+        "whattotest": "ask"
+      }
+    },
+    "decisions": {
+      "outputPath": "./decisions.md"
+    },
+    "whattotest": {
+      "onExisting": "ask"
     }
   }
 }
 ```
 
-**Options**: `"always"` | `"ask"` | `"never"`
+### Config Options
+
+**changelog-plugin.changelog.outputPath**: `"./changelog.md"` | `"./docs/changelog.md"` | custom path
+**changelog-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`
+**changelog-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
+**changelog-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
+**changelog-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
+
+### Persisting User Choices
+
+When prompting the user for a location or preference, offer to save their choice:
+"Would you like to save this preference to `.claude/config.json` for future runs?"
+
+If yes, create or update the config file under the `changelog-plugin` namespace.
 
 Command-line arguments override config file settings.

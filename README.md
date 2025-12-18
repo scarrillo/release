@@ -76,20 +76,37 @@ Or run any command standalone.
 
 ### Persistent Config
 
-Create `.claude/config.json` in your project:
+Create `.claude/config.json` in your project (a sample is included). Settings are namespaced under `changelog-plugin`:
 
 ```json
 {
-  "changelog": {
-    "followUp": {
-      "decisions": "ask",
-      "whattotest": "always"
+  "changelog-plugin": {
+    "changelog": {
+      "outputPath": "./changelog.md",
+      "followUp": {
+        "decisions": "ask",
+        "whattotest": "ask"
+      }
+    },
+    "decisions": {
+      "outputPath": "./decisions.md"
+    },
+    "whattotest": {
+      "onExisting": "ask"
     }
   }
 }
 ```
 
-**Options**: `"always"` | `"ask"` | `"never"`
+| Option | Values |
+|--------|--------|
+| `outputPath` | `"./file.md"`, `"./docs/file.md"`, custom |
+| `followUp.*` | `"always"`, `"ask"`, `"never"` |
+| `onExisting` | `"prepend"`, `"replace"`, `"ask"` |
+
+When prompted for choices, you can save them to config for future runs.
+
+Command-line flags override config settings.
 
 ## License
 

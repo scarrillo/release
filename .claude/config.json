@@ -1,0 +1,17 @@
+{
+  "changelog-plugin": {
+    "changelog": {
+      "outputPath": "./changelog.md",
+      "followUp": {
+        "decisions": "ask",
+        "whattotest": "ask"
+      }
+    },
+    "decisions": {
+      "outputPath": "./decisions.md"
+    },
+    "whattotest": {
+      "onExisting": "ask"
+    }
+  }
+}
