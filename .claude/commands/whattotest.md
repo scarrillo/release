@@ -1,13 +1,15 @@
 # TestFlight WhatToTest Generator
 
-Generate a WhatToTest.txt document for TestFlight beta releases based on recent changelog documents.
+Generate a WhatToTest.txt document for TestFlight beta releases.
 
 ## Instructions
 
-1. **Locate recent changelogs** by:
-   - Reading existing changelog files in the project
-   - Checking git history for recent changes if no changelog exists
-   - Looking for release notes or version documentation
+1. **Locate source content** (in priority order):
+   - **If called from /changelog**: Use the Public User-Facing Summary that was just generated in this session. Do not re-analyze - derive directly from that summary.
+   - **If called directly**: Look for source content in this order:
+     1. Recent changelog files in the project (specifically the Public User-Facing Summary section)
+     2. Git commit history for recent changes
+     3. Release notes or version documentation
 
 2. **Create TestFlight folder structure** if it doesn't exist:
    ```

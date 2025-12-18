@@ -33,22 +33,26 @@ Generate a comprehensive changelog document based on recent changes in this proj
    - **Bug Fixes**: Issues that were resolved
    - **Breaking Changes**: Changes that may affect existing functionality (if any)
 
-3. **Generate two summaries**:
+3. **Generate two summaries** (in this order):
 
-### Internal Developer Summary
-Create a technical summary for the development team that includes:
-- Detailed technical changes
-- Files modified and why
-- Architecture or implementation notes
-- Migration steps if applicable
-- Known issues or limitations
+### Internal Developer Summary (write this first)
+Create comprehensive technical notes for the development team using **Problem/Solution format**. This is the authoritative record of all changes.
 
-### Public User-Facing Summary
-Create a user-friendly summary that includes:
-- Features described in terms of user benefits
-- Improvements written in plain language
-- Bug fixes described by the problem they solve (not technical details)
-- Skip internal refactoring or technical debt items
+For each change, include:
+- **Problem**: What issue or need prompted this change?
+- **Solution**: How was it solved? Include relevant code snippets.
+- **How It Works**: For complex features, explain the implementation logic
+- **Files Changed**: List of files modified/created with brief description of each
+- **Dependencies**: Any packages added/updated
+- **Migration Notes**: Steps needed if applicable
+- **Known Issues**: Any limitations or issues to be aware of
+
+### Public User-Facing Summary (derive from developer summary)
+Based on the Internal Developer Summary above, create a simplified user-friendly version:
+- Translate technical features into user benefits
+- Rewrite improvements in plain, non-technical language
+- Describe bug fixes by the problem they solve (not the technical fix)
+- **Omit**: Internal refactoring, technical debt, developer tooling changes, implementation details users don't need to know
 
 ## Output Format
 
@@ -61,14 +65,25 @@ Create or update a changelog document with the following structure:
 
 ### Internal Developer Summary
 
-#### Features
-- [Technical description of feature]
+#### [Feature/Fix Name]
 
-#### Improvements
-- [Technical description of improvement]
+**Problem**: [Description of the issue or need]
 
-#### Bug Fixes
-- [Technical description of fix]
+**Solution**: [How it was solved]
+
+```swift
+// Relevant code snippet showing the implementation
+```
+
+**How It Works**: [For complex features, explain the logic]
+
+**Files Changed**:
+- `path/to/file.swift` - [what changed]
+- `path/to/another.swift` - [what changed]
+
+**Dependencies**: [Any added/updated, or "None"]
+
+**Known Issues**: [Any limitations, or "None"]
 
 ---
 
@@ -83,6 +98,18 @@ Create or update a changelog document with the following structure:
 #### Bug Fixes
 - [User-friendly fix description]
 ```
+
+## After Changelog Generation
+
+Once the changelog is complete, ask the user about follow-up documentation:
+
+1. **Decisions**: "Were there any decisions or proposals discussed this session that should be documented?"
+   - If yes, run /decisions to capture decisions, proposals, and trade-offs from the session
+   - This includes implemented decisions, deferred ideas, and rejected approaches
+
+2. **WhatToTest**: "Would you like me to generate TestFlight WhatToTest.txt from the public-facing summary?"
+   - If yes, use the **Public User-Facing Summary** to generate WhatToTest.txt
+   - Do not re-analyze - derive directly from the public summary
 
 ## Arguments
 
