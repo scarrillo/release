@@ -32,9 +32,22 @@ Capture decisions and proposals from the current session for future reference. I
 
 3. **Organize by topic** for easy future reference
 
+## Output Location
+
+**If decisions.md doesn't exist**, ask the user:
+"Where should I create the decisions document?"
+1. Project root (`./decisions.md`)
+2. Documentation folder (`./docs/decisions.md`)
+3. Same location as changelog (if it exists)
+4. Custom location (let user specify)
+
+**If decisions.md already exists**, use its current location.
+
+**If file exists:** Prepend new entries after the `# Decisions & Proposals` header (newest entries at top). Read existing content first to avoid duplicates.
+
 ## Output Format
 
-Create or update `decisions.md` at the project root with this structure:
+Structure:
 
 ```markdown
 # Decisions & Proposals

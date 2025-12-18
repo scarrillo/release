@@ -54,9 +54,21 @@ Based on the Internal Developer Summary above, create a simplified user-friendly
 - Describe bug fixes by the problem they solve (not the technical fix)
 - **Omit**: Internal refactoring, technical debt, developer tooling changes, implementation details users don't need to know
 
+## Output Location
+
+**If changelog.md doesn't exist**, ask the user:
+"Where should I create the changelog?"
+1. Project root (`./changelog.md`)
+2. Documentation folder (`./docs/changelog.md`)
+3. Custom location (let user specify)
+
+**If changelog.md already exists**, use its current location.
+
+**If file exists:** Prepend new entries after the `# Changelog` header (newest entries at top). Read existing content first to avoid duplicates and maintain format consistency.
+
 ## Output Format
 
-Create or update a changelog document with the following structure:
+Structure:
 
 ```markdown
 # Changelog

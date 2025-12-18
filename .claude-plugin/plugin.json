@@ -1,5 +1,5 @@
 {
-  "name": "release-docs",
+  "name": "changelog",
   "version": "1.0.0",
   "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
   "author": {

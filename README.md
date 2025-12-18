@@ -1,4 +1,4 @@
-# Release Docs Plugin
+# Changelog Plugin
 
 A Claude Code plugin for release documentation automation. Generates changelogs, captures architectural decisions, and creates TestFlight testing guides.
 
@@ -11,7 +11,7 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 /plugin marketplace add scarrillo/changelog
 
 # Install the plugin
-/plugin install release-docs@scarrillo
+/plugin install changelog@scarrillo
 ```
 
 ### Local Development
@@ -21,7 +21,7 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 /plugin marketplace add /path/to/changelog
 
 # Install
-/plugin install release-docs@changelog
+/plugin install changelog@changelog
 ```
 
 ## Commands
