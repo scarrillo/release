@@ -11,18 +11,17 @@ Generate a WhatToTest.txt document for TestFlight beta releases.
      2. Git commit history for recent changes
      3. Release notes or version documentation
 
-2. **Output location** (required by Apple):
+2. **Output location**:
 
-   The `TestFlight` folder **must** be at project root for Xcode to include it in builds.
+   **If WhatToTest.txt doesn't exist**, ask the user:
+   "Where should I create WhatToTest.txt?"
+   1. TestFlight folder (`./TestFlight/WhatToTest.txt`) - Recommended
+   2. Project root (`./WhatToTest.txt`)
+   3. Custom location (let user specify)
 
-   Create the folder structure if it doesn't exist:
-   ```
-   ProjectRoot/
-   └── TestFlight/
-       └── WhatToTest.txt
-   ```
+   Default to TestFlight folder if no preference is set. Create the folder if needed.
 
-   **If WhatToTest.txt exists**, ask the user:
+   **If WhatToTest.txt already exists**, use its current location and ask:
    "WhatToTest.txt already exists. How should I handle it?"
    1. Prepend new entry (keep history, newest at top)
    2. Replace all (start fresh with only this release)
@@ -38,9 +37,7 @@ Generate a WhatToTest.txt document for TestFlight beta releases.
 Structure for each release entry:
 
 ```
-=====================================
-[Version] - YYYY-MM-DD
-=====================================
+[App Name] v[Version] - YYYY-MM-DD
 
 [Brief overview of this beta release - 1-2 sentences]
 
@@ -60,9 +57,10 @@ Known Issues:
 Feedback Focus:
 - [Specific questions or areas where you want tester feedback]
 
+---
 ```
 
-When prepending, each release gets its own section with version header.
+When prepending, each release gets its own section separated by `---`.
 
 ## Notes
 

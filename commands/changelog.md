@@ -175,6 +175,7 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 **changelog-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`
 **changelog-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
 **changelog-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
+**changelog-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.txt"` | `"./WhatToTest.txt"` | custom path
 **changelog-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
 
 ### Persisting User Choices
