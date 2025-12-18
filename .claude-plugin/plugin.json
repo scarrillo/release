@@ -1,6 +1,6 @@
 {
   "name": "changelog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
   "author": {
     "name": "Shawn Carrillo",
