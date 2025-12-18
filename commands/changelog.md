@@ -119,7 +119,13 @@ Once the changelog is complete, ask the user about follow-up documentation:
    - If yes, run /decisions to capture decisions, proposals, and trade-offs from the session
    - This includes implemented decisions, deferred ideas, and rejected approaches
 
-2. **WhatToTest**: "Would you like me to generate TestFlight WhatToTest.txt from the public-facing summary?"
+2. **WhatToTest** (Xcode projects only):
+   - Check config for `changelog-plugin.whattotest.enabled` setting
+   - If not set, detect if this is an Xcode project by checking for: `.xcodeproj`, `.xcworkspace`, `Package.swift`, or `Podfile`
+   - If Xcode project detected (or `enabled: true` in config):
+     - Ask: "Would you like me to generate TestFlight WhatToTest.txt from the public-facing summary?"
+     - Offer to save preference: "Save this as default for this project?"
+   - If not an Xcode project (and no config override), skip this prompt
    - If yes, use the **Public User-Facing Summary** to generate WhatToTest.txt
    - Do not re-analyze - derive directly from the public summary
 
@@ -175,6 +181,7 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 **changelog-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`
 **changelog-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
 **changelog-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
+**changelog-plugin.whattotest.enabled**: `"auto"` (detect Xcode project) | `true` | `false`
 **changelog-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.txt"` | `"./WhatToTest.txt"` | custom path
 **changelog-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
 
