@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
   "author": {
-    "name": "LogicPhase"
+    "name": "Shawn Carrillo",
+    "url": "https://github.com/scarrillo"
   },
-  "keywords": ["release", "changelog", "documentation", "testflight", "ios"],
+  "homepage": "https://github.com/scarrillo/changelog",
+  "repository": "https://github.com/scarrillo/changelog",
+  "license": "MIT",
+  "keywords": ["release", "changelog", "documentation", "testflight", "ios", "claude-code"],
   "category": "productivity"
 }

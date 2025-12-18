@@ -8,20 +8,20 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 
 ```bash
 # Add the marketplace
-/plugin marketplace add yourorg/release-docs
+/plugin marketplace add scarrillo/changelog
 
 # Install the plugin
-/plugin install release-docs@yourorg
+/plugin install release-docs@scarrillo
 ```
 
 ### Local Development
 
 ```bash
 # Add local marketplace
-/plugin marketplace add /path/to/release-docs
+/plugin marketplace add /path/to/changelog
 
 # Install
-/plugin install release-docs@release-docs
+/plugin install release-docs@changelog
 ```
 
 ## Commands
