@@ -5,11 +5,12 @@ Generate a WhatToTest.txt document for TestFlight beta releases.
 ## Instructions
 
 1. **Locate source content** (in priority order):
-   - **If called from /changelog**: Use the Public User-Facing Summary that was just generated in this session. Do not re-analyze - derive directly from that summary.
+   - **If called from /changelog**: Use the `changelog-public.md` that was just generated in this session. Do not re-analyze - derive directly from that file.
    - **If called directly**: Look for source content in this order:
-     1. Recent changelog files in the project (specifically the Public User-Facing Summary section)
-     2. Git commit history for recent changes
-     3. Release notes or version documentation
+     1. `changelog-public.md` in the project
+     2. Recent changelog files in the project
+     3. Git commit history for recent changes
+     4. Release notes or version documentation
 
 2. **Output location**:
 

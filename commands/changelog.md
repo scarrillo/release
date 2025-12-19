@@ -56,26 +56,30 @@ Based on the Internal Developer Summary above, create a simplified user-friendly
 
 ## Output Location
 
+**Two files are generated:**
+- `changelog.md` - Internal Developer Summary (comprehensive technical notes)
+- `changelog-public.md` - Public User-Facing Summary (user-friendly release notes)
+
+Both files are created in the same location.
+
 **If changelog.md doesn't exist**, ask the user:
-"Where should I create the changelog?"
-1. Project root (`./changelog.md`)
-2. Documentation folder (`./docs/changelog.md`)
+"Where should I create the changelog files?"
+1. Project root (`./changelog.md` and `./changelog-public.md`)
+2. Documentation folder (`./docs/changelog.md` and `./docs/changelog-public.md`)
 3. Custom location (let user specify)
 
-**If changelog.md already exists**, use its current location.
+**If changelog.md already exists**, use its current location for both files.
 
-**If file exists:** Prepend new entries after the `# Changelog` header (newest entries at top). Read existing content first to avoid duplicates and maintain format consistency.
+**If files exist:** Prepend new entries after the header (newest entries at top). Read existing content first to avoid duplicates and maintain format consistency.
 
 ## Output Format
 
-Structure:
+### changelog.md (Internal Developer Summary)
 
 ```markdown
 # Changelog
 
 ## [Version] - YYYY-MM-DD
-
-### Internal Developer Summary
 
 #### [Feature/Fix Name]
 
@@ -98,17 +102,25 @@ Structure:
 **Known Issues**: [Any limitations, or "None"]
 
 ---
+```
 
-### Public User-Facing Summary
+### changelog-public.md (Public User-Facing Summary)
 
-#### What's New
+```markdown
+# Release Notes
+
+## [Version] - YYYY-MM-DD
+
+### What's New
 - [User-friendly feature description]
 
-#### Improvements
+### Improvements
 - [User-friendly improvement description]
 
-#### Bug Fixes
+### Bug Fixes
 - [User-friendly fix description]
+
+---
 ```
 
 ## After Changelog Generation

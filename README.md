@@ -28,7 +28,7 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/changelog` | Generate changelog from session work | `changelog.md` |
+| `/changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
 | `/decisions` | Capture decisions and proposals | `decisions.md` |
 | `/whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.txt` |
 
@@ -50,7 +50,9 @@ Or run any command standalone.
 - Uses current session context as primary source
 - Cross-references with git to deduplicate
 - Problem/Solution format with code snippets
-- Generates developer + user-facing summaries
+- Generates two files:
+  - `changelog.md` - Technical developer notes
+  - `changelog-public.md` - User-friendly release notes
 
 ### `/decisions`
 - Documents decisions regardless of implementation status
@@ -58,7 +60,7 @@ Or run any command standalone.
 - Records rationale and trade-offs
 
 ### `/whattotest`
-- Derives content from changelog's public summary
+- Derives content from `changelog-public.md`
 - Creates `TestFlight/` folder structure
 - Tester-focused, actionable format
 - Stays within 4000 character limit
