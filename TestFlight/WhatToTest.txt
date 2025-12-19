@@ -1,0 +1,79 @@
+=====================================
+v1.0.3 - 2025-12-19
+=====================================
+
+What's New:
+- Separate Release Notes - Public release notes now generated as their own file (changelog-public.md) for easy sharing
+
+Improvements:
+- Smarter TestFlight Detection - WhatToTest prompts only appear for iOS/macOS projects
+- Flexible File Locations - WhatToTest.txt can now be placed at project root or TestFlight folder
+- Cleaner Test Notes - Simplified WhatToTest format with just version and date header
+- Better Config Persistence - Preferences are now reliably saved when you choose to remember them
+
+Bug Fixes:
+- Fixed config file not being created when saving preferences
+
+Key Areas to Test:
+
+1. Split Changelog Output
+   - Run /changelog:changelog and verify two files are generated
+   - Check changelog.md has Problem/Solution format
+   - Check changelog-public.md has user-friendly format
+
+2. WhatToTest Location
+   - Test output to TestFlight/ folder (default)
+   - Test output to project root
+   - Verify location preference is saved to config
+
+3. Xcode Detection
+   - Run in non-Xcode project - should skip WhatToTest prompt
+   - Run in Xcode project - should prompt for WhatToTest
+   - Test manual override via config
+
+4. Config Persistence
+   - Choose to save preferences when prompted
+   - Verify .claude/config.json is created/updated correctly
+
+---
+
+=====================================
+v1.0.0 - 2025-12-17
+=====================================
+
+Initial release of the Changelog Plugin for Claude Code.
+
+Key Areas to Test:
+
+1. Changelog Generation
+   - Run /changelog:changelog after a coding session
+   - Verify it captures session work correctly
+   - Check that Problem/Solution format is clear
+   - Confirm both developer and user summaries are generated
+
+2. Decisions Capture
+   - Run /changelog:decisions standalone
+   - Run /changelog:decisions from changelog prompt
+   - Verify all status types work (Implemented, Proposed, Deferred, Rejected)
+
+3. WhatToTest Generation
+   - Run /changelog:whattotest standalone
+   - Run /changelog:whattotest from changelog prompt
+   - Verify TestFlight folder is created correctly
+
+4. Configuration
+   - Test file location prompts on first run
+   - Verify config persistence in .claude/config.json
+   - Test command-line flags (--auto, --skip, etc.)
+
+5. Plugin Installation
+   - Install via /plugin marketplace add scarrillo/changelog
+   - Verify commands appear with changelog: prefix
+
+Known Issues:
+- Commands are namespaced as changelog:* (e.g., /changelog:changelog)
+
+Feedback Focus:
+- Is the Problem/Solution format useful for your workflow?
+- Are the prompts too frequent or about right?
+- What output locations would you prefer as defaults?

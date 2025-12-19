@@ -65,6 +65,17 @@ Or run any command standalone.
 - Tester-focused, actionable format
 - Stays within 4000 character limit
 
+## Sample Output
+
+This plugin documents itself. View real output in this repo:
+
+| File | Description |
+|------|-------------|
+| [`docs/changelog.md`](docs/changelog.md) | Developer changelog with Problem/Solution format |
+| [`docs/changelog-public.md`](docs/changelog-public.md) | User-facing release notes |
+| [`docs/decisions.md`](docs/decisions.md) | Architectural decisions and proposals |
+| [`TestFlight/WhatToTest.txt`](TestFlight/WhatToTest.txt) | Beta tester instructions |
+
 ## Configuration
 
 ### Command Flags

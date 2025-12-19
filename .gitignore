@@ -1,6 +1,6 @@
-## Test output
-docs/
-TestFlight/
+## Test output - We'll use this as sample docs in the readme.
+#docs/
+#TestFlight/
 
 # local project settings - we don't want to commit this in a marketplace plugin
 .claude/settings.local.json
