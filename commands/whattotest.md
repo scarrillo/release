@@ -1,6 +1,6 @@
 # TestFlight WhatToTest Generator
 
-Generate a WhatToTest.txt document for TestFlight beta releases.
+Generate a WhatToTest document for TestFlight beta releases.
 
 ## Instructions
 
@@ -12,22 +12,27 @@ Generate a WhatToTest.txt document for TestFlight beta releases.
      3. Git commit history for recent changes
      4. Release notes or version documentation
 
-2. **Output location**:
+2. **Check for existing WhatToTest files**:
 
-   **If WhatToTest.txt doesn't exist**, ask the user:
-   "Where should I create WhatToTest.txt?"
-   1. TestFlight folder (`./TestFlight/WhatToTest.txt`) - Recommended
-   2. Project root (`./WhatToTest.txt`)
-   3. Custom location (let user specify)
+   Search for existing WhatToTest files in common locations:
+   - `./TestFlight/WhatToTest.txt`
+   - `./TestFlight/WhatToTest.en-US.txt` (or other locale variants like `.de.txt`, `.fr.txt`)
+   - `./WhatToTest.txt` or `./WhatToTest.en-US.txt` at project root
 
-   Default to TestFlight folder if no preference is set. Create the folder if needed.
-
-   **If WhatToTest.txt already exists**, use its current location and ask:
-   "WhatToTest.txt already exists. How should I handle it?"
+   **If existing file(s) found**, use the same location and filename, then ask:
+   "WhatToTest file already exists. How should I handle it?"
    1. Prepend new entry (keep history, newest at top)
    2. Replace all (start fresh with only this release)
 
-3. **Generate WhatToTest.txt content** that is:
+   **If no existing file found**, ask the user:
+   "Where should I create the WhatToTest file?"
+   1. TestFlight folder (`./TestFlight/WhatToTest.en-US.txt`) - Recommended
+   2. Project root (`./WhatToTest.en-US.txt`)
+   3. Custom location (let user specify path and filename)
+
+   Create the TestFlight folder if it doesn't exist and that location is chosen.
+
+3. **Generate WhatToTest content** that is:
    - Concise and actionable for testers
    - Focused on what testers should specifically test
    - Written in plain language (non-technical)
@@ -65,10 +70,11 @@ When prepending, each release gets its own section separated by `---`.
 
 ## Notes
 
-- The WhatToTest.txt file is automatically included with your TestFlight build when placed in a `TestFlight` folder at your project root
+- The WhatToTest file is automatically included with your TestFlight build when placed in a `TestFlight` folder at your project root
 - Keep content under 4000 characters (TestFlight limit)
 - Focus on NEW or CHANGED functionality that needs testing
-- You can also create localized versions like `WhatToTest.en-US.txt` for specific locales
+- Localized filenames: `WhatToTest.en-US.txt` (US English), `WhatToTest.de.txt` (German), etc.
+- `WhatToTest.txt` (without locale) serves as fallback for all users
 
 ## Arguments
 

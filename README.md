@@ -30,7 +30,7 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 |---------|-------------|--------|
 | `/changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
 | `/decisions` | Capture decisions and proposals | `decisions.md` |
-| `/whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.txt` |
+| `/whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
 
 ## Workflow
 
