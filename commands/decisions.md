@@ -1,6 +1,12 @@
+---
+description: Capture architectural decisions and proposals from session
+---
+
 # Decisions Document Generator
 
 Capture decisions and proposals from the current session for future reference. Includes both implemented decisions and proposals still under consideration.
+
+**Model**: Uses the model configured in `changelog-plugin.model` (see /changelog for model selection).
 
 ## How to Run
 

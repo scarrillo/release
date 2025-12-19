@@ -1,4 +1,66 @@
 =====================================
+v1.0.5 - 2025-12-19
+=====================================
+
+What's New:
+- Model Selection - Choose which Claude model to use for changelog generation. Opus users can now hand off to faster models like Sonnet or Haiku.
+
+Improvements:
+- Persistent Preferences - Model choice can be saved to project config for future runs
+- Consistent Model Usage - All plugin commands use the same model setting
+
+Key Areas to Test:
+
+1. Model Selection Prompt
+   - Run /changelog:changelog in a new project (no config)
+   - Verify prompt appears asking which model to use
+   - Test selecting each option: Current, Opus, Sonnet, Haiku
+
+2. Save Model Preference
+   - When prompted, choose to save preference
+   - Verify .claude/config.json is created/updated with model setting
+   - Run /changelog:changelog again - should not prompt for model
+
+3. Model Inheritance
+   - Set model to "inherit" in config
+   - Verify plugin uses current conversation model
+   - Test with different conversation models
+
+Feedback Focus:
+- Is the model selection prompt clear?
+- Are the model descriptions helpful for choosing?
+
+---
+
+=====================================
+v1.0.4 - 2025-12-19
+=====================================
+
+Improvements:
+- Localized TestFlight Support - WhatToTest now uses locale-specific filenames (WhatToTest.en-US.txt) matching TestFlight's format
+- Smarter File Detection - Automatically finds existing WhatToTest files regardless of locale variant
+- Consistent Updates - Always prompts whether to append or replace existing test notes
+
+Key Areas to Test:
+
+1. Localized Filename Detection
+   - Rename this file to WhatToTest.en-US.txt
+   - Run /changelog:whattotest and verify it finds the renamed file
+   - Confirm it prompts to prepend or replace
+
+2. New File Creation
+   - In a project without WhatToTest, run /changelog:whattotest
+   - Verify default filename is WhatToTest.en-US.txt (not .txt)
+   - Test both TestFlight folder and project root locations
+
+3. Append/Replace Prompt
+   - Run /changelog:whattotest when file exists
+   - Verify prompt appears asking to prepend or replace
+   - Test both options work correctly
+
+---
+
+=====================================
 v1.0.3 - 2025-12-19
 =====================================
 

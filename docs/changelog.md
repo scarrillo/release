@@ -1,5 +1,58 @@
 # Changelog
 
+## [1.0.5] - 2025-12-19
+
+#### Model Selection Feature
+
+**Problem**: Users running Opus may want to use a faster/cheaper model for changelog generation tasks, but there was no way to configure which model the plugin uses.
+
+**Solution**: Added model selection prompt on first run with option to persist choice. Supports all Claude models with "inherit" (current model) as default.
+
+**How It Works**:
+- On first run of `/changelog`, prompts user to select model
+- Options: Current model (inherit), Opus 4.5, Sonnet 4 (recommended), Haiku 3.5
+- Offers to save preference to `.claude/config.json`
+- All plugin commands (changelog, decisions, whattotest) use the same model setting
+- Config setting: `changelog-plugin.model`
+
+**Files Changed**:
+- `commands/changelog.md` - Added Model Selection section and frontmatter
+- `commands/decisions.md` - Added frontmatter and model note
+- `commands/whattotest.md` - Added frontmatter and model note
+- `README.md` - Added Model Selection documentation
+- `.claude/config.json` - Added `model` option
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
+## [1.0.4] - 2025-12-19
+
+#### Localized WhatToTest Filename Support
+
+**Problem**: TestFlight uses locale-specific filenames like `WhatToTest.en-US.txt` for US English, not just `WhatToTest.txt` which is a fallback. The plugin was only checking for the generic filename.
+
+**Solution**: Updated WhatToTest command to detect and support localized filenames, with `WhatToTest.en-US.txt` as the new default for new files.
+
+**How It Works**:
+- Searches for existing files: `WhatToTest.txt`, `WhatToTest.en-US.txt`, and other locale variants (`.de.txt`, `.fr.txt`, etc.)
+- Checks both `TestFlight/` folder and project root
+- When existing file found, uses same location and filename
+- When creating new file, defaults to `WhatToTest.en-US.txt`
+- Always prompts to prepend or replace when file exists
+
+**Files Changed**:
+- `commands/whattotest.md` - Added localized filename detection and updated default
+- `README.md` - Updated WhatToTest output reference to `.en-US.txt`
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
 ## [1.0.3] - 2025-12-19
 
 #### Split Changelog Output

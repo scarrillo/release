@@ -1,5 +1,25 @@
 # Release Notes
 
+## [1.0.5] - 2025-12-19
+
+### What's New
+- **Model Selection** - Choose which Claude model to use for changelog generation. Opus users can now hand off to faster models like Sonnet or Haiku.
+
+### Improvements
+- **Persistent Preferences** - Model choice can be saved to project config for future runs
+- **Consistent Model Usage** - All plugin commands use the same model setting
+
+---
+
+## [1.0.4] - 2025-12-19
+
+### Improvements
+- **Localized TestFlight Support** - WhatToTest now uses locale-specific filenames (`WhatToTest.en-US.txt`) matching TestFlight's format
+- **Smarter File Detection** - Automatically finds existing WhatToTest files regardless of locale variant
+- **Consistent Updates** - Always prompts whether to append or replace existing test notes
+
+---
+
 ## [1.0.3] - 2025-12-19
 
 ### What's New

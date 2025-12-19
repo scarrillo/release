@@ -1,6 +1,12 @@
+---
+description: Generate TestFlight WhatToTest document from changelog
+---
+
 # TestFlight WhatToTest Generator
 
 Generate a WhatToTest document for TestFlight beta releases.
+
+**Model**: Uses the model configured in `changelog-plugin.model` (see /changelog for model selection).
 
 ## Instructions
 

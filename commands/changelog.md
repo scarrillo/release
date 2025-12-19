@@ -1,6 +1,27 @@
+---
+description: Generate changelog from session work with Problem/Solution format
+---
+
 # Changelog Generator
 
 Generate a comprehensive changelog document based on recent changes in this project.
+
+## Model Selection
+
+Before generating the changelog, check for model preference:
+
+1. **Check config** for `changelog-plugin.model` setting
+2. **If not set**, ask the user:
+   "Which model should I use for changelog generation?"
+   1. Current model (inherit from conversation)
+   2. Claude Opus 4.5 (`claude-opus-4-5-20251101`) - Most capable
+   3. Claude Sonnet 4 (`claude-sonnet-4-20250514`) - Balanced (Recommended)
+   4. Claude Haiku 3.5 (`claude-3-5-haiku-20241022`) - Fastest
+
+   Then ask: "Save this as default for this project?"
+   - If yes, persist to `.claude/config.json` under `changelog-plugin.model`
+
+**Note**: Model selection applies to all plugin commands (changelog, decisions, whattotest).
 
 ## Instructions
 
@@ -170,6 +191,7 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 ```json
 {
   "changelog-plugin": {
+    "model": "claude-sonnet-4-20250514",
     "changelog": {
       "outputPath": "./changelog.md",
       "followUp": {
@@ -188,6 +210,12 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 ```
 
 ### Config Options
+
+**changelog-plugin.model**: Model for all plugin commands
+- `"inherit"` - Use current conversation model (default)
+- `"claude-opus-4-5-20251101"` - Most capable
+- `"claude-sonnet-4-20250514"` - Balanced (recommended)
+- `"claude-3-5-haiku-20241022"` - Fastest
 
 **changelog-plugin.changelog.outputPath**: `"./changelog.md"` | `"./docs/changelog.md"` | custom path
 **changelog-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`

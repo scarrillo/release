@@ -78,6 +78,19 @@ This plugin documents itself. View real output in this repo:
 
 ## Configuration
 
+### Model Selection
+
+On first run, you'll be prompted to choose which model to use:
+
+| Model | ID | Use Case |
+|-------|-----|----------|
+| Current | `inherit` | Use conversation's model (default) |
+| Opus 4.5 | `claude-opus-4-5-20251101` | Most capable |
+| Sonnet 4 | `claude-sonnet-4-20250514` | Balanced (recommended) |
+| Haiku 3.5 | `claude-3-5-haiku-20241022` | Fastest |
+
+This allows Opus users to hand off changelog generation to a faster model. Your choice can be saved to config.
+
 ### Command Flags
 
 ```bash
@@ -94,6 +107,7 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
 ```json
 {
   "changelog-plugin": {
+    "model": "claude-sonnet-4-20250514",
     "changelog": {
       "outputPath": "./changelog.md",
       "followUp": {
@@ -113,6 +127,7 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
 
 | Option | Values |
 |--------|--------|
+| `model` | `"inherit"`, `"claude-opus-4-5-20251101"`, `"claude-sonnet-4-20250514"`, `"claude-3-5-haiku-20241022"` |
 | `outputPath` | `"./file.md"`, `"./docs/file.md"`, custom |
 | `followUp.*` | `"always"`, `"ask"`, `"never"` |
 | `onExisting` | `"prepend"`, `"replace"`, `"ask"` |

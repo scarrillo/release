@@ -1,5 +1,6 @@
 {
   "changelog-plugin": {
+    "model": "inherit",
     "changelog": {
       "outputPath": "./changelog.md",
       "followUp": {
