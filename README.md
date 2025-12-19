@@ -19,24 +19,12 @@ End-of-session documentation is tedious. This plugin captures your work while th
 
 ## Installation
 
-### From GitHub
-
 ```bash
 # Add the marketplace
 /plugin marketplace add scarrillo/changelog
 
 # Install the plugin
 /plugin install changelog@scarrillo
-```
-
-### Local Development
-
-```bash
-# Add local marketplace
-/plugin marketplace add /path/to/changelog
-
-# Install
-/plugin install changelog@changelog
 ```
 
 ## Commands
