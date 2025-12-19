@@ -190,6 +190,28 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 When prompting the user for a location or preference, offer to save their choice:
 "Would you like to save this preference to `.claude/config.json` for future runs?"
 
-If yes, create or update the config file under the `changelog-plugin` namespace.
+If yes:
+1. Check if `.claude/config.json` exists in the project root
+2. If not, create the `.claude/` directory and `config.json` file
+3. Read existing config (if any) to preserve other settings
+4. Add/update the setting under the `changelog-plugin` namespace
+5. Write the updated config back to the file
+
+Example - saving changelog outputPath:
+```bash
+# Create .claude directory if needed
+mkdir -p .claude
+
+# Write config with the user's preference
+```
+```json
+{
+  "changelog-plugin": {
+    "changelog": {
+      "outputPath": "./docs/changelog.md"
+    }
+  }
+}
+```
 
 Command-line arguments override config file settings.
