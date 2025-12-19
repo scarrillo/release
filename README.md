@@ -1,6 +1,21 @@
 # Changelog Plugin
 
+[![Version](https://img.shields.io/badge/version-1.0.5-blue.svg)](https://github.com/scarrillo/changelog/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 A Claude Code plugin for release documentation automation. Generates changelogs, captures architectural decisions, and creates TestFlight testing guides.
+
+## Why Use This?
+
+End-of-session documentation is tedious. This plugin captures your work while the context is fresh:
+
+- **Changelogs** - Problem/Solution format from your session, not vague commit messages
+- **Decisions** - Capture the "why" behind choices, even ones you didn't implement
+- **TestFlight notes** - Beta tester instructions derived directly from your changelog
+
+## Requirements
+
+- [Claude Code](https://claude.ai/code) CLI
 
 ## Installation
 
@@ -28,25 +43,27 @@ A Claude Code plugin for release documentation automation. Generates changelogs,
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
-| `/decisions` | Capture decisions and proposals | `decisions.md` |
-| `/whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
+| `/changelog:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
+| `/changelog:decisions` | Capture decisions and proposals | `decisions.md` |
+| `/changelog:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
+
+> **Note**: Commands are namespaced with `changelog:` prefix when installed via marketplace.
 
 ## Workflow
 
 ```
-/changelog          # Document completed work
-    ↓
-/decisions          # Capture decisions (prompted)
-    ↓
-/whattotest         # Generate test notes (prompted)
+/changelog:changelog     # Document completed work
+         ↓
+/changelog:decisions     # Capture decisions (prompted)
+         ↓
+/changelog:whattotest    # Generate test notes (prompted)
 ```
 
 Or run any command standalone.
 
 ## Features
 
-### `/changelog`
+### `/changelog:changelog`
 - Uses current session context as primary source
 - Cross-references with git to deduplicate
 - Problem/Solution format with code snippets
@@ -54,12 +71,12 @@ Or run any command standalone.
   - `changelog.md` - Technical developer notes
   - `changelog-public.md` - User-friendly release notes
 
-### `/decisions`
+### `/changelog:decisions`
 - Documents decisions regardless of implementation status
 - Tracks: Implemented, Proposed, Deferred, Rejected
 - Records rationale and trade-offs
 
-### `/whattotest`
+### `/changelog:whattotest`
 - Derives content from `changelog-public.md`
 - Creates `TestFlight/` folder structure
 - Tester-focused, actionable format
@@ -94,10 +111,10 @@ This allows Opus users to hand off changelog generation to a faster model. Your 
 ### Command Flags
 
 ```bash
-/changelog --auto          # Run all follow-ups automatically
-/changelog --skip          # No follow-ups
-/changelog --decisions     # Auto-run decisions only
-/changelog --no-whattotest # Skip whattotest prompt
+/changelog:changelog --auto          # Run all follow-ups automatically
+/changelog:changelog --skip          # No follow-ups
+/changelog:changelog --decisions     # Auto-run decisions only
+/changelog:changelog --no-whattotest # Skip whattotest prompt
 ```
 
 ### Persistent Config
