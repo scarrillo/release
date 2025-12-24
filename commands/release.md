@@ -47,7 +47,22 @@ If no argument provided, ask the user:
 | 3. major | (X+1).0.0 | Breaking changes |
 | 4. tag | (no change) | Create or update tag only |
 
-### 4. Check Git Execution Mode
+### 4. Generate Release Documentation (Optional)
+
+Before committing the release, ask the user:
+
+"Would you like to generate release documentation first?"
+1. **Yes** - Run `/changelog:changelog` now (recommended)
+2. **No** - Skip documentation
+
+If yes, execute `/changelog:changelog` which will:
+- Generate `changelog.md` (developer notes)
+- Generate `changelog-public.md` (user-facing release notes)
+- Optionally prompt for `/changelog:decisions` and `/changelog:whattotest`
+
+This ensures documentation is included in the release commit.
+
+### 5. Check Git Execution Mode
 
 Check config for `changelog-plugin.release.gitMode` setting.
 
@@ -57,12 +72,17 @@ Check config for `changelog-plugin.release.gitMode` setting.
 1. **Run automatically** - Claude executes git commands (showing progress)
 2. **Show commands only** - Display commands for you to run manually
 
+If user selects option 1 (auto):
+- Confirm Claude has permission to execute git commands
+- Request bash permissions for git operations if needed
+- Test with a safe command like `git status` to verify access
+
 Then ask: "Save this preference for future runs?"
 - If yes, persist to `.claude/config.json` under `changelog-plugin.release.gitMode`
   - Option 1 → `"auto"`
   - Option 2 → `"manual"`
 
-### 5. Execute Version Increment
+### 6. Execute Version Increment
 
 **For patch/minor/major:**
 
@@ -83,7 +103,8 @@ Then ask: "Save this preference for future runs?"
 6. **If gitMode is "auto"** - Execute git commands (showing each command as it runs):
    ```
    Running: git add <version-file>
-   Running: git commit -m "Increment version to A.B.C"
+   Running: git add <changelog-files>  # if documentation was generated
+   Running: git commit -m "Release vA.B.C"
    Running: git tag rel.vA.B.C
    ```
 
@@ -101,8 +122,8 @@ Then ask: "Save this preference for future runs?"
    Version file updated to A.B.C
 
    Run these commands to complete the release:
-     git add <version-file>
-     git commit -m "Increment version to A.B.C"
+     git add <version-file> <changelog-files>
+     git commit -m "Release vA.B.C"
      git tag rel.vA.B.C
      git push && git push origin rel.vA.B.C
    ```
