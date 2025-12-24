@@ -6,12 +6,12 @@ description: Generate TestFlight WhatToTest document from changelog
 
 Generate a WhatToTest document for TestFlight beta releases.
 
-**Model**: Uses the model configured in `changelog-plugin.model` (see /changelog for model selection).
+**Model**: Uses the model configured in `release-plugin.model` (see /release:changelog for model selection).
 
 ## Instructions
 
 1. **Locate source content** (in priority order):
-   - **If called from /changelog**: Use the `changelog-public.md` that was just generated in this session. Do not re-analyze - derive directly from that file.
+   - **If called from /release:changelog**: Use the `changelog-public.md` that was just generated in this session. Do not re-analyze - derive directly from that file.
    - **If called directly**: Look for source content in this order:
      1. `changelog-public.md` in the project
      2. Recent changelog files in the project

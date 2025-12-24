@@ -1,9 +1,34 @@
 # Release Notes
 
+## [1.1.0] - 2025-12-23
+
+### Breaking Changes
+- **Plugin Renamed** - "Changelog Plugin" is now "Release Plugin"
+- **New Command Namespace** - Commands are now `/release:*` instead of `/changelog:*`
+- **Config Migration** - Update config namespace from `changelog-plugin` to `release-plugin`
+
+### What's New
+- **Expanded Scope** - Now a comprehensive release automation toolkit with semantic versioning, changelogs, decisions, and TestFlight integration
+
+### Improvements
+- **Documentation Before Release** - `/release:release` now prompts to generate changelog before committing
+- **Git Execution Modes** - Choose between Claude running git commands or displaying them for manual execution
+- **Permission Verification** - Confirms git permissions before auto-executing commands
+
+### Migration Guide
+```bash
+/plugin uninstall changelog@scarrillo
+/plugin marketplace remove scarrillo
+/plugin marketplace add scarrillo/release
+/plugin install release@scarrillo
+```
+
+---
+
 ## [1.0.6] - 2025-12-23
 
 ### What's New
-- **Release Command** - New `/changelog:release` command automates version increments, commits, and git tags for iOS releases
+- **Release Command** - New `/release:release` command automates version increments, commits, and git tags for iOS releases
 
 ### Improvements
 - **SemVer Support** - Increment major, minor, or patch versions following semantic versioning

@@ -1,17 +1,22 @@
-# Changelog Plugin
+# Release Plugin
 
-[![Version](https://img.shields.io/badge/version-1.0.6-blue.svg)](https://github.com/scarrillo/changelog/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A Claude Code plugin for release documentation automation. Generates changelogs, captures architectural decisions, and creates TestFlight testing guides.
+A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
 
 ## Why Use This?
 
-End-of-session documentation is tedious. This plugin captures your work while the context is fresh:
+Release management is tedious. This plugin automates the repetitive parts:
 
+- **Version Management** - Increment versions per SemVer, commit, and tag in one command
 - **Changelogs** - Problem/Solution format from your session, not vague commit messages
 - **Decisions** - Capture the "why" behind choices, even ones you didn't implement
 - **TestFlight notes** - Beta tester instructions derived directly from your changelog
+
+## About
+
+> **Renamed from "Changelog Plugin"** - Now a comprehensive release toolkit with semantic versioning, changelogs, and more. Commands are now namespaced under `release:` (e.g., `/release:changelog`).
 
 ## Requirements
 
@@ -21,38 +26,47 @@ End-of-session documentation is tedious. This plugin captures your work while th
 
 ```bash
 # Add the marketplace
-/plugin marketplace add scarrillo/changelog
+/plugin marketplace add scarrillo/release
 
 # Install the plugin
-/plugin install changelog@scarrillo
+/plugin install release@scarrillo
 ```
 
 ## Commands
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/changelog:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
-| `/changelog:decisions` | Capture decisions and proposals | `decisions.md` |
-| `/changelog:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
-| `/changelog:release` | Increment version (SemVer), commit, tag | Git commit + `rel.vX.Y.Z` tag |
+| `/release:release` | Increment version (SemVer), commit, tag | Git commit + `rel.vX.Y.Z` tag |
+| `/release:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
+| `/release:decisions` | Capture decisions and proposals | `decisions.md` |
+| `/release:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
 
-> **Note**: Commands are namespaced with `changelog:` prefix when installed via marketplace.
+> **Note**: Commands are namespaced with `release:` prefix when installed via marketplace.
 
 ## Workflow
 
 ```
-/changelog:changelog     # Document completed work
+/release:changelog       # Document completed work
          ↓
-/changelog:decisions     # Capture decisions (prompted)
+/release:decisions       # Capture decisions (prompted)
          ↓
-/changelog:whattotest    # Generate test notes (prompted)
+/release:whattotest      # Generate test notes (prompted)
+         ↓
+/release:release         # Increment version, commit, tag
 ```
 
 Or run any command standalone.
 
 ## Features
 
-### `/changelog:changelog`
+### `/release:release`
+- Increment version per [SemVer](https://semver.org) (major, minor, patch)
+- Auto-detects Xcode projects (more platforms coming)
+- Prompts to generate changelog before committing
+- Updates version file, commits, and creates git tag
+- `tag` option for CI/CD triggers without version change
+
+### `/release:changelog`
 - Uses current session context as primary source
 - Cross-references with git to deduplicate
 - Problem/Solution format with code snippets
@@ -60,22 +74,16 @@ Or run any command standalone.
   - `changelog.md` - Technical developer notes
   - `changelog-public.md` - User-friendly release notes
 
-### `/changelog:decisions`
+### `/release:decisions`
 - Documents decisions regardless of implementation status
 - Tracks: Implemented, Proposed, Deferred, Rejected
 - Records rationale and trade-offs
 
-### `/changelog:whattotest`
+### `/release:whattotest`
 - Derives content from `changelog-public.md`
 - Creates `TestFlight/` folder structure
 - Tester-focused, actionable format
 - Stays within 4000 character limit
-
-### `/changelog:release`
-- Increment version per [SemVer](https://semver.org) (major, minor, patch)
-- Auto-detects Xcode projects (more platforms coming)
-- Updates version file, commits, and creates git tag
-- `tag` option for CI/CD triggers without version change
 
 ## Sample Output
 
@@ -101,24 +109,24 @@ On first run, you'll be prompted to choose which model to use:
 | Sonnet 4 | `claude-sonnet-4-20250514` | Balanced (recommended) |
 | Haiku 3.5 | `claude-3-5-haiku-20241022` | Fastest |
 
-This allows Opus users to hand off changelog generation to a faster model. Your choice can be saved to config.
+This allows Opus users to hand off tasks to a faster model. Your choice can be saved to config.
 
 ### Command Flags
 
 ```bash
-/changelog:changelog --auto          # Run all follow-ups automatically
-/changelog:changelog --skip          # No follow-ups
-/changelog:changelog --decisions     # Auto-run decisions only
-/changelog:changelog --no-whattotest # Skip whattotest prompt
+/release:changelog --auto          # Run all follow-ups automatically
+/release:changelog --skip          # No follow-ups
+/release:changelog --decisions     # Auto-run decisions only
+/release:changelog --no-whattotest # Skip whattotest prompt
 ```
 
 ### Persistent Config
 
-Create `.claude/config.json` in your project (a sample is included). Settings are namespaced under `changelog-plugin`:
+Create `.claude/config.json` in your project (a sample is included). Settings are namespaced under `release-plugin`:
 
 ```json
 {
-  "changelog-plugin": {
+  "release-plugin": {
     "model": "claude-sonnet-4-20250514",
     "changelog": {
       "outputPath": "./changelog.md",
@@ -132,6 +140,9 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
     },
     "whattotest": {
       "onExisting": "ask"
+    },
+    "release": {
+      "gitMode": "auto"
     }
   }
 }
@@ -143,6 +154,7 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
 | `outputPath` | `"./file.md"`, `"./docs/file.md"`, custom |
 | `followUp.*` | `"always"`, `"ask"`, `"never"` |
 | `onExisting` | `"prepend"`, `"replace"`, `"ask"` |
+| `gitMode` | `"auto"` (Claude runs git), `"manual"` (show commands only) |
 
 When prompted for choices, you can save them to config for future runs.
 

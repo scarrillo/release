@@ -1,5 +1,5 @@
 {
-  "changelog-plugin": {
+  "release-plugin": {
     "model": "inherit",
     "changelog": {
       "outputPath": "./changelog.md",

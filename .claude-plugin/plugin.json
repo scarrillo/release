@@ -1,13 +1,13 @@
 {
-  "name": "changelog",
-  "version": "1.0.6",
-  "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
+  "name": "release",
+  "version": "1.1.0",
+  "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
   "author": {
     "name": "Shawn Carrillo",
     "url": "https://github.com/scarrillo"
   },
-  "homepage": "https://github.com/scarrillo/changelog",
-  "repository": "https://github.com/scarrillo/changelog",
+  "homepage": "https://github.com/scarrillo/release",
+  "repository": "https://github.com/scarrillo/release",
   "license": "MIT",
-  "keywords": ["release", "changelog", "documentation", "testflight", "ios", "claude-code"]
+  "keywords": ["release", "semver", "changelog", "documentation", "testflight", "ios", "claude-code"]
 }

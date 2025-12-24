@@ -12,14 +12,14 @@ Improvements:
 Key Areas to Test:
 
 1. Model Selection Prompt
-   - Run /changelog:changelog in a new project (no config)
+   - Run /release:changelog in a new project (no config)
    - Verify prompt appears asking which model to use
    - Test selecting each option: Current, Opus, Sonnet, Haiku
 
 2. Save Model Preference
    - When prompted, choose to save preference
    - Verify .claude/config.json is created/updated with model setting
-   - Run /changelog:changelog again - should not prompt for model
+   - Run /release:changelog again - should not prompt for model
 
 3. Model Inheritance
    - Set model to "inherit" in config
@@ -45,16 +45,16 @@ Key Areas to Test:
 
 1. Localized Filename Detection
    - Rename this file to WhatToTest.en-US.txt
-   - Run /changelog:whattotest and verify it finds the renamed file
+   - Run /release:whattotest and verify it finds the renamed file
    - Confirm it prompts to prepend or replace
 
 2. New File Creation
-   - In a project without WhatToTest, run /changelog:whattotest
+   - In a project without WhatToTest, run /release:whattotest
    - Verify default filename is WhatToTest.en-US.txt (not .txt)
    - Test both TestFlight folder and project root locations
 
 3. Append/Replace Prompt
-   - Run /changelog:whattotest when file exists
+   - Run /release:whattotest when file exists
    - Verify prompt appears asking to prepend or replace
    - Test both options work correctly
 
@@ -79,7 +79,7 @@ Bug Fixes:
 Key Areas to Test:
 
 1. Split Changelog Output
-   - Run /changelog:changelog and verify two files are generated
+   - Run /release:changelog and verify two files are generated
    - Check changelog.md has Problem/Solution format
    - Check changelog-public.md has user-friendly format
 
@@ -103,24 +103,24 @@ Key Areas to Test:
 v1.0.0 - 2025-12-17
 =====================================
 
-Initial release of the Changelog Plugin for Claude Code.
+Initial release of the Release Plugin for Claude Code.
 
 Key Areas to Test:
 
 1. Changelog Generation
-   - Run /changelog:changelog after a coding session
+   - Run /release:changelog after a coding session
    - Verify it captures session work correctly
    - Check that Problem/Solution format is clear
    - Confirm both developer and user summaries are generated
 
 2. Decisions Capture
-   - Run /changelog:decisions standalone
-   - Run /changelog:decisions from changelog prompt
+   - Run /release:decisions standalone
+   - Run /release:decisions from changelog prompt
    - Verify all status types work (Implemented, Proposed, Deferred, Rejected)
 
 3. WhatToTest Generation
-   - Run /changelog:whattotest standalone
-   - Run /changelog:whattotest from changelog prompt
+   - Run /release:whattotest standalone
+   - Run /release:whattotest from changelog prompt
    - Verify TestFlight folder is created correctly
 
 4. Configuration
@@ -129,11 +129,11 @@ Key Areas to Test:
    - Test command-line flags (--auto, --skip, etc.)
 
 5. Plugin Installation
-   - Install via /plugin marketplace add scarrillo/changelog
-   - Verify commands appear with changelog: prefix
+   - Install via /plugin marketplace add scarrillo/release
+   - Verify commands appear with release: prefix
 
 Known Issues:
-- Commands are namespaced as changelog:* (e.g., /changelog:changelog)
+- Commands are namespaced as release:* (e.g., /release:changelog)
 
 Feedback Focus:
 - Is the Problem/Solution format useful for your workflow?

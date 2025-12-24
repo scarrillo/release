@@ -6,12 +6,12 @@ description: Capture architectural decisions and proposals from session
 
 Capture decisions and proposals from the current session for future reference. Includes both implemented decisions and proposals still under consideration.
 
-**Model**: Uses the model configured in `changelog-plugin.model` (see /changelog for model selection).
+**Model**: Uses the model configured in `release-plugin.model` (see /release:changelog for model selection).
 
 ## How to Run
 
 - **Standalone**: Run `/decisions` directly at any point to capture decisions from the current session
-- **From /changelog**: After generating a changelog, you'll be prompted to run this command
+- **From /release:changelog**: After generating a changelog, you'll be prompted to run this command
 
 ## When to Use
 

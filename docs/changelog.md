@@ -1,12 +1,73 @@
 # Changelog
 
+## [1.1.0] - 2025-12-23
+
+#### Plugin Renamed to "Release"
+
+**Problem**: The plugin started as a changelog generator but has grown to include version management, decisions tracking, and TestFlight integration. The name "changelog" no longer reflected its full capabilities.
+
+**Solution**: Renamed plugin from "changelog" to "release" - a comprehensive release automation toolkit.
+
+**Breaking Changes**:
+- Plugin name: `changelog` → `release`
+- Command namespace: `/changelog:*` → `/release:*`
+- Config namespace: `changelog-plugin` → `release-plugin`
+- Marketplace: `scarrillo/changelog` → `scarrillo/release`
+
+**Migration**:
+1. Uninstall old plugin: `/plugin uninstall changelog@scarrillo`
+2. Remove old marketplace: `/plugin marketplace remove scarrillo`
+3. Add new marketplace: `/plugin marketplace add scarrillo/release`
+4. Install new plugin: `/plugin install release@scarrillo`
+5. Update config namespace in `.claude/config.json` from `changelog-plugin` to `release-plugin`
+
+**How It Works**:
+- Commands remain the same: changelog, decisions, whattotest, release
+- New namespace: `/release:changelog`, `/release:decisions`, `/release:whattotest`, `/release:release`
+- Default command when running `/release` is now `/release:release`
+
+**Files Changed**:
+- `.claude-plugin/plugin.json` - Renamed to "release"
+- `.claude-plugin/marketplace.json` - Updated marketplace and plugin names
+- `.claude/config.json` - Namespace changed to `release-plugin`
+- `README.md` - All references updated
+- `commands/*.md` - Config references updated
+- `TestFlight/WhatToTest.txt` - Command references updated
+
+**Dependencies**: None
+
+**Known Issues**: Users must manually migrate from the old plugin.
+
+---
+
+#### Release Command Enhancements
+
+**Problem**: The release command needed better integration with documentation and git permission handling.
+
+**Solution**: Added documentation prompt before commits and configurable git execution mode.
+
+**How It Works**:
+- Before committing, prompts to run `/release:changelog` to include docs in release
+- Asks user preference for git command execution (auto vs manual)
+- Verifies git permissions when auto mode selected
+- Persists git mode preference to config
+
+**Files Changed**:
+- `commands/release.md` - Added documentation prompt and git mode configuration
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
 ## [1.0.6] - 2025-12-23
 
 #### Release Command
 
 **Problem**: Releasing iOS apps requires manually incrementing version numbers, updating Xcode project files, committing, and creating git tags. This is repetitive and error-prone.
 
-**Solution**: Added `/changelog:release` command that automates semantic versioning for Xcode projects with support for future platforms.
+**Solution**: Added `/release:release` command that automates semantic versioning for Xcode projects with support for future platforms.
 
 **How It Works**:
 - Detects Xcode project (`.xcodeproj`) automatically
@@ -89,10 +150,10 @@
 **Solution**: Split changelog into two separate files - `changelog.md` for developer notes and `changelog-public.md` for user-facing release notes.
 
 **How It Works**:
-- `/changelog:changelog` now generates two files in the same location
+- `/release:changelog` now generates two files in the same location
 - `changelog.md` contains Problem/Solution format with code snippets
 - `changelog-public.md` contains user-friendly release notes
-- `/changelog:whattotest` derives content from `changelog-public.md`
+- `/release:whattotest` derives content from `changelog-public.md`
 
 **Files Changed**:
 - `commands/changelog.md` - Updated output format to two files
@@ -193,9 +254,9 @@
 ```
 
 **How It Works**:
-- `/changelog:changelog` - Analyzes current session context as primary source, cross-references with git to deduplicate, generates Problem/Solution format with code snippets
-- `/changelog:decisions` - Captures architectural decisions regardless of implementation status (Implemented, Proposed, Deferred, Rejected)
-- `/changelog:whattotest` - Derives TestFlight WhatToTest.txt from the changelog's public-facing summary
+- `/release:changelog` - Analyzes current session context as primary source, cross-references with git to deduplicate, generates Problem/Solution format with code snippets
+- `/release:decisions` - Captures architectural decisions regardless of implementation status (Implemented, Proposed, Deferred, Rejected)
+- `/release:whattotest` - Derives TestFlight WhatToTest.txt from the changelog's public-facing summary
 
 Commands can chain together: changelog → decisions → whattotest, or run standalone.
 
@@ -212,7 +273,7 @@ Commands can chain together: changelog → decisions → whattotest, or run stan
 **Dependencies**: None
 
 **Known Issues**:
-- Commands are namespaced as `changelog:*` (e.g., `/changelog:changelog`) when installed via marketplace
+- Commands are namespaced as `release:*` (e.g., `/release:changelog`) when installed via marketplace
 
 ---
 

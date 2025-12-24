@@ -6,7 +6,7 @@ description: Increment version (SemVer), commit, and tag for release
 
 Interactive version management for software projects. Automates [semantic versioning (SemVer)](https://semver.org), project file updates, and git tag creation.
 
-**Model**: Uses the model configured in `changelog-plugin.model` (see /changelog for model selection).
+**Model**: Uses the model configured in `release-plugin.model` (see /release:changelog for model selection).
 
 ## Instructions
 
@@ -52,19 +52,19 @@ If no argument provided, ask the user:
 Before committing the release, ask the user:
 
 "Would you like to generate release documentation first?"
-1. **Yes** - Run `/changelog:changelog` now (recommended)
+1. **Yes** - Run `/release:changelog` now (recommended)
 2. **No** - Skip documentation
 
-If yes, execute `/changelog:changelog` which will:
+If yes, execute `/release:changelog` which will:
 - Generate `changelog.md` (developer notes)
 - Generate `changelog-public.md` (user-facing release notes)
-- Optionally prompt for `/changelog:decisions` and `/changelog:whattotest`
+- Optionally prompt for `/release:decisions` and `/release:whattotest`
 
 This ensures documentation is included in the release commit.
 
 ### 5. Check Git Execution Mode
 
-Check config for `changelog-plugin.release.gitMode` setting.
+Check config for `release-plugin.release.gitMode` setting.
 
 **If not set**, ask the user:
 
@@ -78,7 +78,7 @@ If user selects option 1 (auto):
 - Test with a safe command like `git status` to verify access
 
 Then ask: "Save this preference for future runs?"
-- If yes, persist to `.claude/config.json` under `changelog-plugin.release.gitMode`
+- If yes, persist to `.claude/config.json` under `release-plugin.release.gitMode`
   - Option 1 → `"auto"`
   - Option 2 → `"manual"`
 
@@ -154,20 +154,20 @@ Then ask: "Save this preference for future runs?"
 $ARGUMENTS
 
 **Direct increment type:**
-- `/release patch` - Increment patch version (bug fixes)
-- `/release minor` - Increment minor version (new features)
-- `/release major` - Increment major version (breaking changes)
-- `/release tag` - Create or update tag (no version change)
+- `/release:release patch` - Increment patch version (bug fixes)
+- `/release:release minor` - Increment minor version (new features)
+- `/release:release major` - Increment major version (breaking changes)
+- `/release:release tag` - Create or update tag (no version change)
 
 If no argument, show interactive menu.
 
 ## Configuration
 
-Check for `.claude/config.json` at project root. Look for settings under `changelog-plugin.release`:
+Check for `.claude/config.json` at project root. Look for settings under `release-plugin.release`:
 
 ```json
 {
-  "changelog-plugin": {
+  "release-plugin": {
     "release": {
       "gitMode": "auto"
     }
@@ -192,11 +192,11 @@ The `tag` option is useful for triggering CI builds without incrementing the ver
 **Example:**
 ```bash
 # Initial release
-/release patch              # Creates rel.v1.2.4, commits, tags
+/release:release patch          # Creates rel.v1.2.4, commits, tags
 
 # Quick fix needed in same version
 git commit -m "Fix critical bug"
-/release tag                # Updates rel.v1.2.4 to current commit
+/release:release tag            # Updates rel.v1.2.4 to current commit
 git push origin -f rel.v1.2.4   # Triggers new CI build
 ```
 

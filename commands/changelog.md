@@ -10,7 +10,7 @@ Generate a comprehensive changelog document based on recent changes in this proj
 
 Before generating the changelog, check for model preference:
 
-1. **Check config** for `changelog-plugin.model` setting
+1. **Check config** for `release-plugin.model` setting
 2. **If not set**, ask the user:
    "Which model should I use for changelog generation?"
    1. Current model (inherit from conversation)
@@ -19,7 +19,7 @@ Before generating the changelog, check for model preference:
    4. Claude Haiku 3.5 (`claude-3-5-haiku-20241022`) - Fastest
 
    Then ask: "Save this as default for this project?"
-   - If yes, persist to `.claude/config.json` under `changelog-plugin.model`
+   - If yes, persist to `.claude/config.json` under `release-plugin.model`
 
 **Note**: Model selection applies to all plugin commands (changelog, decisions, whattotest).
 
@@ -153,7 +153,7 @@ Once the changelog is complete, ask the user about follow-up documentation:
    - This includes implemented decisions, deferred ideas, and rejected approaches
 
 2. **WhatToTest** (Xcode projects only):
-   - Check config for `changelog-plugin.whattotest.enabled` setting
+   - Check config for `release-plugin.whattotest.enabled` setting
    - If not set, detect if this is an Xcode project by checking for: `.xcodeproj`, `.xcworkspace`, `Package.swift`, or `Podfile`
    - If Xcode project detected (or `enabled: true` in config):
      - Ask: "Would you like me to generate TestFlight WhatToTest.txt from the public-facing summary?"
@@ -167,8 +167,8 @@ Once the changelog is complete, ask the user about follow-up documentation:
 $ARGUMENTS
 
 **Version/date range**: Scope changelog to specific version or time period
-- `/changelog v1.2.0`
-- `/changelog 2024-01-01`
+- `/release:changelog v1.2.0`
+- `/release:changelog 2024-01-01`
 
 **Follow-up behavior flags**:
 - `--auto` - Automatically run both /decisions and /whattotest without asking
@@ -180,17 +180,17 @@ $ARGUMENTS
 - `--no-whattotest` - Skip /whattotest prompt
 
 **Examples**:
-- `/changelog --auto` - Generate all docs without prompts
-- `/changelog --skip` - Only changelog, no follow-ups
-- `/changelog v1.2.0 --decisions --no-whattotest` - Version 1.2.0, auto-run decisions, skip whattotest
+- `/release:changelog --auto` - Generate all docs without prompts
+- `/release:changelog --skip` - Only changelog, no follow-ups
+- `/release:changelog v1.2.0 --decisions --no-whattotest` - Version 1.2.0, auto-run decisions, skip whattotest
 
 ## Configuration File
 
-Check for `.claude/config.json` at project root. Look for settings under the **`changelog-plugin`** namespace:
+Check for `.claude/config.json` at project root. Look for settings under the **`release-plugin`** namespace:
 
 ```json
 {
-  "changelog-plugin": {
+  "release-plugin": {
     "model": "claude-sonnet-4-20250514",
     "changelog": {
       "outputPath": "./changelog.md",
@@ -211,19 +211,19 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 
 ### Config Options
 
-**changelog-plugin.model**: Model for all plugin commands
+**release-plugin.model**: Model for all plugin commands
 - `"inherit"` - Use current conversation model (default)
 - `"claude-opus-4-5-20251101"` - Most capable
 - `"claude-sonnet-4-20250514"` - Balanced (recommended)
 - `"claude-3-5-haiku-20241022"` - Fastest
 
-**changelog-plugin.changelog.outputPath**: `"./changelog.md"` | `"./docs/changelog.md"` | custom path
-**changelog-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`
-**changelog-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
-**changelog-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
-**changelog-plugin.whattotest.enabled**: `"auto"` (detect Xcode project) | `true` | `false`
-**changelog-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.txt"` | `"./WhatToTest.txt"` | custom path
-**changelog-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
+**release-plugin.changelog.outputPath**: `"./changelog.md"` | `"./docs/changelog.md"` | custom path
+**release-plugin.changelog.followUp.decisions**: `"always"` | `"ask"` | `"never"`
+**release-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
+**release-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
+**release-plugin.whattotest.enabled**: `"auto"` (detect Xcode project) | `true` | `false`
+**release-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.txt"` | `"./WhatToTest.txt"` | custom path
+**release-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
 
 ### Persisting User Choices
 
@@ -234,7 +234,7 @@ If yes:
 1. Check if `.claude/config.json` exists in the project root
 2. If not, create the `.claude/` directory and `config.json` file
 3. Read existing config (if any) to preserve other settings
-4. Add/update the setting under the `changelog-plugin` namespace
+4. Add/update the setting under the `release-plugin` namespace
 5. Write the updated config back to the file
 
 Example - saving changelog outputPath:
@@ -246,7 +246,7 @@ mkdir -p .claude
 ```
 ```json
 {
-  "changelog-plugin": {
+  "release-plugin": {
     "changelog": {
       "outputPath": "./docs/changelog.md"
     }

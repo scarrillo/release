@@ -1,22 +1,22 @@
 {
-  "name": "scarrillo-changelog",
+  "name": "scarrillo-release",
   "owner": {
     "name": "Shawn Carrillo",
     "email": "shawn@scarrillo.com"
   },
   "plugins": [
     {
-      "name": "changelog",
+      "name": "release",
       "source": "./",
-      "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
-      "version": "1.0.6",
+      "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
+      "version": "1.1.0",
       "author": {
         "name": "Shawn Carrillo"
       },
-      "homepage": "https://github.com/scarrillo/changelog",
-      "repository": "https://github.com/scarrillo/changelog",
+      "homepage": "https://github.com/scarrillo/release",
+      "repository": "https://github.com/scarrillo/release",
       "license": "MIT",
-      "keywords": ["release", "changelog", "documentation", "testflight", "ios"],
+      "keywords": ["release", "semver", "changelog", "documentation", "testflight", "ios"],
       "category": "productivity"
     }
   ]

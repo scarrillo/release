@@ -125,7 +125,7 @@ Single plugin - the repo is both a marketplace (has `marketplace.json`) and cont
 Simpler to start with, and the marketplace.json wrapper allows future expansion without restructuring.
 
 ### Trade-offs Accepted
-Commands are namespaced (e.g., `/changelog:changelog` instead of `/changelog`)
+Commands are namespaced (e.g., `/release:changelog` instead of `/changelog`)
 
 ### References
 - https://code.claude.com/docs/en/plugin-marketplaces
