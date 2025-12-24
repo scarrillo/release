@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.0.6] - 2025-12-23
+
+#### Release Command
+
+**Problem**: Releasing iOS apps requires manually incrementing version numbers, updating Xcode project files, committing, and creating git tags. This is repetitive and error-prone.
+
+**Solution**: Added `/changelog:release` command that automates semantic versioning for Xcode projects with support for future platforms.
+
+**How It Works**:
+- Detects Xcode project (`.xcodeproj`) automatically
+- Reads current `MARKETING_VERSION` from `project.pbxproj`
+- Prompts for increment type: patch, minor, major, or tag
+- Updates all version occurrences in project file
+- Commits with message "Increment version to X.Y.Z"
+- Creates git tag `rel.vX.Y.Z`
+- `tag` option creates or updates tag without version change (useful for CI/CD triggers)
+
+**Files Changed**:
+- `commands/release.md` - New release command
+- `README.md` - Added release command documentation
+
+**Dependencies**: None
+
+**Known Issues**: Currently only supports Xcode projects. Next.js, Android, Flutter support planned.
+
+---
+
 ## [1.0.5] - 2025-12-19
 
 #### Model Selection Feature

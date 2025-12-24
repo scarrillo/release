@@ -1,6 +1,6 @@
 # Changelog Plugin
 
-[![Version](https://img.shields.io/badge/version-1.0.5-blue.svg)](https://github.com/scarrillo/changelog/releases)
+[![Version](https://img.shields.io/badge/version-1.0.6-blue.svg)](https://github.com/scarrillo/changelog/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release documentation automation. Generates changelogs, captures architectural decisions, and creates TestFlight testing guides.
@@ -34,6 +34,7 @@ End-of-session documentation is tedious. This plugin captures your work while th
 | `/changelog:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
 | `/changelog:decisions` | Capture decisions and proposals | `decisions.md` |
 | `/changelog:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
+| `/changelog:release` | Increment version (SemVer), commit, tag | Git commit + `rel.vX.Y.Z` tag |
 
 > **Note**: Commands are namespaced with `changelog:` prefix when installed via marketplace.
 
@@ -69,6 +70,12 @@ Or run any command standalone.
 - Creates `TestFlight/` folder structure
 - Tester-focused, actionable format
 - Stays within 4000 character limit
+
+### `/changelog:release`
+- Increment version per [SemVer](https://semver.org) (major, minor, patch)
+- Auto-detects Xcode projects (more platforms coming)
+- Updates version file, commits, and creates git tag
+- `tag` option for CI/CD triggers without version change
 
 ## Sample Output
 

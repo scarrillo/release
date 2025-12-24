@@ -4,3 +4,4 @@
 
 # local project settings - we don't want to commit this in a marketplace plugin
 .claude/settings.local.json
+tmp-release/

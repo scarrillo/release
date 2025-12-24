@@ -1,5 +1,17 @@
 # Release Notes
 
+## [1.0.6] - 2025-12-23
+
+### What's New
+- **Release Command** - New `/changelog:release` command automates version increments, commits, and git tags for iOS releases
+
+### Improvements
+- **SemVer Support** - Increment major, minor, or patch versions following semantic versioning
+- **Xcode Auto-Detection** - Automatically finds and updates your Xcode project
+- **CI/CD Integration** - `tag` option triggers builds without incrementing version
+
+---
+
 ## [1.0.5] - 2025-12-19
 
 ### What's New

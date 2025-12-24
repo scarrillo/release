@@ -15,6 +15,9 @@
       "enabled": "auto",
       "outputPath": "./TestFlight/WhatToTest.txt",
       "onExisting": "ask"
+    },
+    "release": {
+      "gitMode": "auto"
     }
   }
 }

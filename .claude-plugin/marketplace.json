@@ -9,7 +9,7 @@
       "name": "changelog",
       "source": "./",
       "description": "Release documentation automation - generates changelogs, captures decisions, and creates TestFlight testing guides",
-      "version": "1.0.5",
+      "version": "1.0.6",
       "author": {
         "name": "Shawn Carrillo"
       },
