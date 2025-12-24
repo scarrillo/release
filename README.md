@@ -1,6 +1,6 @@
 # Release Plugin
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
@@ -61,9 +61,9 @@ Or run any command standalone.
 
 ### `/release:release`
 - Increment version per [SemVer](https://semver.org) (major, minor, patch)
-- Auto-detects Xcode projects (more platforms coming)
+- Auto-detects project type: Claude Plugin, Xcode (more platforms coming)
 - Prompts to generate changelog before committing
-- Updates version file, commits, and creates git tag
+- Updates version file(s), commits, and creates git tag
 - `tag` option for CI/CD triggers without version change
 
 ### `/release:changelog`

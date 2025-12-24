@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.2.0] - 2025-12-23
+
+#### Claude Plugin Release Support
+
+**Problem**: The `/release:release` command only supported Xcode projects, so the plugin couldn't release itself since it's a Claude marketplace plugin.
+
+**Solution**: Added Claude Plugin as a supported project type for version management.
+
+**How It Works**:
+- Detects `.claude-plugin/plugin.json` in project root (checked before Xcode)
+- Reads current version from `plugin.json`
+- Updates version in both `plugin.json` and `marketplace.json` (plugins[0].version)
+- Detection is scoped to project root only to avoid finding installed plugins in subdirectories
+
+**Files Changed**:
+- `commands/release.md` - Added Claude Plugin detection, version reading, and update instructions
+- `README.md` - Updated feature list to show Claude Plugin support
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
 ## [1.1.0] - 2025-12-23
 
 #### Plugin Renamed to "Release"

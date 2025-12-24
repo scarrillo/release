@@ -1,5 +1,16 @@
 # Release Notes
 
+## [1.2.0] - 2025-12-23
+
+### What's New
+- **Claude Plugin Support** - The release command can now version and release Claude marketplace plugins, not just Xcode projects
+
+### Improvements
+- **Self-releasing** - This plugin can now release itself using `/release:release`
+- **Project Root Scoping** - Detection only checks the immediate project root, avoiding confusion with installed plugins or dependencies
+
+---
+
 ## [1.1.0] - 2025-12-23
 
 ### Breaking Changes

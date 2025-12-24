@@ -12,18 +12,29 @@ Interactive version management for software projects. Automates [semantic versio
 
 ### 1. Detect Project Type
 
-Check for project files in order:
+Check for project files **in the project root only** (not recursively) in this order:
 
-| Project Type | Detection | Version File |
-|--------------|-----------|--------------|
-| **Xcode (iOS/macOS)** | `*.xcodeproj` directory | `project.pbxproj` → `MARKETING_VERSION` |
+| Project Type | Detection | Version File(s) |
+|--------------|-----------|-----------------|
+| **Claude Plugin** | `.claude-plugin/plugin.json` in project root | `plugin.json` + `marketplace.json` → `version` |
+| **Xcode (iOS/macOS)** | `*.xcodeproj` directory in project root | `project.pbxproj` → `MARKETING_VERSION` |
 | *(Future: Next.js)* | `package.json` + `next.config.*` | `package.json` → `version` |
 | *(Future: Android)* | `build.gradle` or `build.gradle.kts` | `build.gradle` → `versionName` |
 
+**Important**: Only check the immediate project root for detection files. Do not search subdirectories to avoid finding installed plugins, dependencies, or nested projects.
+
 If no supported project type found:
-"No supported project detected. Currently supports: Xcode (iOS/macOS)"
+"No supported project detected. Currently supports: Claude Plugin, Xcode (iOS/macOS)"
 
 ### 2. Read Current Version
+
+**For Claude plugins:**
+1. Read `.claude-plugin/plugin.json`
+2. Extract `version` field value
+3. Parse SemVer components (MAJOR.MINOR.PATCH)
+
+Display: "Project: Claude Plugin ([plugin name])"
+Display: "Current version: X.Y.Z"
 
 **For Xcode projects:**
 1. Find `.xcodeproj` directory in project root
@@ -95,14 +106,17 @@ Then ask: "Save this preference for future runs?"
 
 3. Confirm: "Proceed with version increment?"
 
-4. Update version file:
+4. Update version file(s):
+   - **Claude Plugin**: Update `version` field in both:
+     - `.claude-plugin/plugin.json`
+     - `.claude-plugin/marketplace.json` (in the `plugins[0].version` field)
    - **Xcode**: Replace ALL `MARKETING_VERSION = X.Y.Z;` with `MARKETING_VERSION = A.B.C;` in `project.pbxproj`
 
 5. Verify update succeeded by reading back the version
 
 6. **If gitMode is "auto"** - Execute git commands (showing each command as it runs):
    ```
-   Running: git add <version-file>
+   Running: git add <version-file(s)>  # plugin.json + marketplace.json for Claude, or project.pbxproj for Xcode
    Running: git add <changelog-files>  # if documentation was generated
    Running: git commit -m "Release vA.B.C"
    Running: git tag rel.vA.B.C
@@ -201,6 +215,11 @@ git push origin -f rel.v1.2.4   # Triggers new CI build
 ```
 
 ## Project-Specific Notes
+
+### Claude Plugin
+- Updates version in both `plugin.json` and `marketplace.json`
+- Both files must have matching versions for marketplace distribution
+- Detection is scoped to `.claude-plugin/` in project root only
 
 ### Xcode (iOS/macOS)
 - Only modifies `MARKETING_VERSION` in project.pbxproj
