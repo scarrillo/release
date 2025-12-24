@@ -85,6 +85,17 @@ Or run any command standalone.
 - Tester-focused, actionable format
 - Stays within 4000 character limit
 
+## Supported Project Types
+
+| Project Type | Detection | Version Location |
+|--------------|-----------|------------------|
+| **Claude Plugin** | `.claude-plugin/plugin.json` | `plugin.json` + `marketplace.json` |
+| **Xcode (iOS/macOS)** | `*.xcodeproj` | `project.pbxproj` → `MARKETING_VERSION` |
+
+More platforms coming: Next.js, Android, Flutter, React Native.
+
+> **Fun fact**: This plugin can release itself. We used `/release:release` to publish v1.2.0.
+
 ## Sample Output
 
 This plugin documents itself. View real output in this repo:
