@@ -1,4 +1,4 @@
-# Release Plugin
+# Release Toolkit Plugin For Claude Code
 
 [![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
