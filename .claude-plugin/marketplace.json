@@ -2,7 +2,11 @@
   "name": "scarrillo-release",
   "owner": {
     "name": "Shawn Carrillo",
-    "email": "shawn@scarrillo.com"
+    "email": "release@shawn.co"
+  },
+  "metadata": {
+    "description": "Release automation plugins for Claude Code - SemVer versioning, changelogs, and CI/CD integration",
+    "version": "1.0.0"
   },
   "plugins": [
     {
@@ -11,12 +15,35 @@
       "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
       "version": "1.2.0",
       "author": {
-        "name": "Shawn Carrillo"
+        "name": "Shawn Carrillo",
+        "email": "release@shawn.co"
       },
       "homepage": "https://github.com/scarrillo/release",
       "repository": "https://github.com/scarrillo/release",
       "license": "MIT",
-      "keywords": ["release", "semver", "changelog", "documentation", "testflight", "ios"],
+      "keywords": [
+        "release",
+        "release-automation",
+        "semver",
+        "semantic-versioning",
+        "versioning",
+        "changelog",
+        "release-notes",
+        "git",
+        "git-tag",
+        "ci-cd",
+        "cicd",
+        "testflight",
+        "whattotest",
+        "ios",
+        "macos",
+        "xcode",
+        "adr",
+        "decisions",
+        "documentation",
+        "automation"
+      ],
+      "tags": ["release", "versioning", "changelog", "ci-cd", "testflight", "automation"],
       "category": "productivity"
     }
   ]

@@ -4,10 +4,33 @@
   "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
   "author": {
     "name": "Shawn Carrillo",
-    "url": "https://github.com/scarrillo"
+    "email": "release@shawn.co"
   },
   "homepage": "https://github.com/scarrillo/release",
   "repository": "https://github.com/scarrillo/release",
   "license": "MIT",
-  "keywords": ["release", "semver", "changelog", "documentation", "testflight", "ios", "claude-code"]
+  "keywords": [
+    "release",
+    "release-automation",
+    "semver",
+    "semantic-versioning",
+    "versioning",
+    "changelog",
+    "release-notes",
+    "git",
+    "git-tag",
+    "ci-cd",
+    "cicd",
+    "testflight",
+    "whattotest",
+    "ios",
+    "macos",
+    "xcode",
+    "adr",
+    "decisions",
+    "documentation",
+    "automation",
+    "claude-code",
+    "claude-plugin"
+  ]
 }
