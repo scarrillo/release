@@ -17,41 +17,71 @@ $ARGUMENTS
 
 ## Configuration
 
-Check `.claude/config.json` for persistent settings under `release-plugin.xcbuild`:
+Plugin settings are stored in dedicated config files (Claude Code's `settings.json` has a strict schema):
 
+| Scope | File | Use Case |
+|-------|------|----------|
+| `project` | `.claude/config.json` | Team defaults, version controlled |
+| `local` | `.claude/config.local.json` | Personal settings, gitignored |
+
+### Project Settings (`.claude/config.json`)
+Team defaults, committed to version control:
 ```json
 {
   "release-plugin": {
     "xcbuild": {
       "scheme": "MyApp",
-      "simulatorId": "A2444326-C93A-4271-9EF0-C44AA5D4FC42",
       "showWarnings": true
     }
   }
 }
 ```
 
-| Setting | Description |
-|---------|-------------|
-| `scheme` | Default scheme to build |
-| `simulatorId` | Default simulator UUID |
-| `showWarnings` | Show build warnings in output (default: true) |
+### Local Settings (`.claude/config.local.json`)
+Personal settings, gitignored (simulator UUIDs are machine-specific):
+```json
+{
+  "release-plugin": {
+    "xcbuild": {
+      "simulatorId": "A2444326-C93A-4271-9EF0-C44AA5D4FC42",
+      "scheme": "MyApp-Dev"
+    }
+  }
+}
+```
+
+### Settings Reference
+
+| Setting | Recommended Scope | Description |
+|---------|-------------------|-------------|
+| `scheme` | project | Default scheme (team default) |
+| `simulatorId` | local | Default simulator UUID (machine-specific) |
+| `showWarnings` | project | Show build warnings in output (default: true) |
+
+### Precedence (highest to lowest)
+1. Command-line arguments (`--scheme=`, `--id=`)
+2. Local config (`.claude/config.local.json`)
+3. Project config (`.claude/config.json`)
+4. Session cache
+5. Prompt user
 
 ## Instructions
 
 ### Step 1: Check for arguments and cached settings
 
 Parse `$ARGUMENTS`:
-- If `--id=<UUID>` is provided, use that UUID for this build only (skip to Step 6)
-- If `--scheme=<name>` is provided, use that scheme and update cache (skip to Step 4 for simulator selection if needed)
-- If `--change` is provided, clear all cached settings and proceed to Step 2
-- If no arguments:
-  1. Check `.claude/config.json` for `release-plugin.xcbuild.scheme` and `release-plugin.xcbuild.simulatorId`
-  2. If both are set, skip to Step 6
-  3. If you have cached project/scheme/simulator from this session, skip to Step 6
-  4. Otherwise proceed to Step 2
+- If `--id=<UUID>` is provided, use that UUID for this build only (skip to Step 5)
+- If `--scheme=<name>` is provided, use that scheme and update cache (proceed to Step 3)
+- If `--change` is provided, clear all cached settings and proceed to Step 1b
+- If no arguments, check settings in precedence order:
+  1. `.claude/config.local.json` → `release-plugin.xcbuild.scheme` and `simulatorId`
+  2. `.claude/config.json` → `release-plugin.xcbuild.scheme` and `simulatorId`
+  3. Session cache from earlier in this conversation
+  4. If scheme is missing, proceed to Step 1b (detect project, then select scheme)
+  5. If simulator is missing, proceed to Step 3 (query and select simulator)
+  6. If both are found, proceed to Step 3 (query simulators to validate ID)
 
-### Step 2: Detect Xcode project (first run only)
+### Step 1b: Detect Xcode project (if needed)
 
 Find the project or workspace in the current directory:
 ```bash
@@ -62,7 +92,7 @@ ls -d *.xcworkspace 2>/dev/null || ls -d *.xcodeproj 2>/dev/null
 - If multiple found, use the first one
 - **Cache the project/workspace name** for subsequent builds
 
-### Step 3: Select scheme (first run only)
+### Step 2: Select scheme (if needed)
 
 Get available schemes:
 ```bash
@@ -91,10 +121,9 @@ Example for a project with schemes `["MyApp", "MyApp ASC Sub", "MyAppKeyboard"]`
 
 After user selects:
 1. **Cache the scheme name** for subsequent builds in this session
-2. Ask: "Save this scheme as default for this project?"
-   - If yes, persist to `.claude/config.json` under `release-plugin.xcbuild.scheme`
+2. Ask: "Save this scheme as the project default?" (saves to `.claude/config.json`)
 
-### Step 4: Query available simulators (first run or --change)
+### Step 3: Query available simulators
 
 First, output a message to the user: "Querying available simulators..."
 
@@ -110,7 +139,16 @@ Parse the JSON to build a list of available iPhone simulators:
 
 Identify the **recommended simulator**: The newest iPhone Pro model on the highest iOS version.
 
-### Step 5: Ask user to select simulator (first run or --change)
+### Step 4: Validate or select simulator
+
+**If a simulator ID was loaded from config or cache:**
+1. Check if the UUID exists in the available simulators list from Step 3
+2. If found, proceed to Step 5 (run build)
+3. If NOT found (stale/invalid UUID):
+   - Inform the user: "Configured simulator not found (may have been deleted or is from a different machine)."
+   - Proceed to simulator selection below
+
+**If no simulator ID or invalid ID:**
 
 Use AskUserQuestion to present options:
 
@@ -126,10 +164,9 @@ Use AskUserQuestion to present options:
 
 After user selects:
 1. **Cache the simulator name and UUID** for subsequent builds in this session
-2. Ask: "Save this simulator as default for this project?"
-   - If yes, persist to `.claude/config.json` under `release-plugin.xcbuild.simulatorId`
+2. Ask: "Save this simulator for this project?" (saves to `.claude/config.local.json`)
 
-### Step 6: Run the build
+### Step 5: Run the build
 
 For a workspace:
 ```bash
@@ -143,7 +180,7 @@ xcodebuild -project <Name>.xcodeproj -scheme <Scheme> -destination "id=<UUID>" b
 
 **Note:** If `release-plugin.xcbuild.showWarnings` is `false` in config, exclude `warning:` from the grep pattern.
 
-### Step 7: Report results
+### Step 6: Report results
 
 Format output as:
 ```
@@ -171,15 +208,27 @@ BUILD FAILED - [summary of errors]
 
 ## Persisting User Choices
 
-When prompting for scheme or simulator, offer to save the choice:
-"Would you like to save this preference to `.claude/config.json` for future runs?"
+After selecting scheme or simulator, offer to save:
 
-If yes:
-1. Check if `.claude/config.json` exists in the project root
-2. If not, create the `.claude/` directory and `config.json` file
-3. Read existing config (if any) to preserve other settings
-4. Add/update the setting under the `release-plugin.xcbuild` namespace
-5. Write the updated config back to the file
+**For scheme** (team default):
+"Save this scheme as the project default?"
+- If yes, save to `.claude/config.json` under `release-plugin.xcbuild.scheme`
+- This is version controlled and shared with the team
+
+**For simulator** (personal/machine-specific):
+"Save this simulator for this project?"
+- If yes, save to `.claude/config.local.json` under `release-plugin.xcbuild.simulatorId`
+- This is gitignored (machine-specific UUIDs)
+
+### Saving to a config file
+
+1. Create `.claude/` directory if needed
+2. Read existing file content (if any) to preserve other settings
+3. Parse as JSON, or start with empty object `{}`
+4. Ensure `release-plugin.xcbuild` path exists
+5. Add/update the specific setting
+6. Write the updated JSON back to the file
+6. Create parent directories if needed (e.g., `mkdir -p ~/.claude`)
 
 ## Examples
 

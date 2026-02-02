@@ -1,6 +1,6 @@
 # Release Toolkit Plugin For Claude Code
 
-[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
@@ -91,7 +91,9 @@ Or run any command standalone.
 - Lists available schemes and recommends main app target
 - Queries available simulators and recommends latest iPhone Pro
 - Caches selections for fast subsequent builds
-- Persists settings to `.claude/config.json` (optional)
+- Persists settings to plugin config files:
+  - Scheme → `.claude/config.json` (project/team default)
+  - Simulator → `.claude/config.local.json` (gitignored, machine-specific)
 - Arguments: `--change` (re-select), `--scheme=<name>`, `--id=<UUID>`
 
 ## Supported Project Types
@@ -180,8 +182,8 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
 | `followUp.*` | `"always"`, `"ask"`, `"never"` |
 | `onExisting` | `"prepend"`, `"replace"`, `"ask"` |
 | `gitMode` | `"auto"` (Claude runs git), `"manual"` (show commands only) |
-| `xcbuild.scheme` | Default scheme name to build |
-| `xcbuild.simulatorId` | Default simulator UUID |
+| `xcbuild.scheme` | Default scheme (in `.claude/config.json`) |
+| `xcbuild.simulatorId` | Default simulator UUID (in `.claude/config.local.json`) |
 | `xcbuild.showWarnings` | `true` (show warnings), `false` (errors only) |
 
 When prompted for choices, you can save them to config for future runs.
