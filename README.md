@@ -1,6 +1,6 @@
 # Release Toolkit Plugin For Claude Code
 
-[![Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/version-1.3.2-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.

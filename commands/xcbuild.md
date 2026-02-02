@@ -79,7 +79,7 @@ Parse `$ARGUMENTS`:
   3. Session cache from earlier in this conversation
   4. If scheme is missing, proceed to Step 1b (detect project, then select scheme)
   5. If simulator is missing, proceed to Step 3 (query and select simulator)
-  6. If both are found, proceed to Step 3 (query simulators to validate ID)
+  6. If both are found, skip to Step 5 (run build - trust saved simulator ID)
 
 ### Step 1b: Detect Xcode project (if needed)
 
@@ -123,7 +123,12 @@ After user selects:
 1. **Cache the scheme name** for subsequent builds in this session
 2. Ask: "Save this scheme as the project default?" (saves to `.claude/config.json`)
 
-### Step 3: Query available simulators
+### Step 3: Query available simulators (only when needed)
+
+**Only run this step when:**
+- No simulator ID is configured (first run)
+- `--change` flag was used
+- Build failed due to invalid simulator
 
 First, output a message to the user: "Querying available simulators..."
 
@@ -139,16 +144,12 @@ Parse the JSON to build a list of available iPhone simulators:
 
 Identify the **recommended simulator**: The newest iPhone Pro model on the highest iOS version.
 
-### Step 4: Validate or select simulator
+### Step 4: Select simulator (first run or after build failure)
 
-**If a simulator ID was loaded from config or cache:**
-1. Check if the UUID exists in the available simulators list from Step 3
-2. If found, proceed to Step 5 (run build)
-3. If NOT found (stale/invalid UUID):
-   - Inform the user: "Configured simulator not found (may have been deleted or is from a different machine)."
-   - Proceed to simulator selection below
-
-**If no simulator ID or invalid ID:**
+**Only run this step when:**
+- No simulator ID is configured (first run)
+- `--change` flag was used
+- Build failed due to invalid simulator (see Step 5)
 
 Use AskUserQuestion to present options:
 
@@ -179,6 +180,12 @@ xcodebuild -project <Name>.xcodeproj -scheme <Scheme> -destination "id=<UUID>" b
 ```
 
 **Note:** If `release-plugin.xcbuild.showWarnings` is `false` in config, exclude `warning:` from the grep pattern.
+
+**If build fails due to invalid simulator** (error contains "unable to find a destination matching" or similar):
+1. Inform the user: "Configured simulator not found. It may have been deleted or this config is from a different machine."
+2. Go to Step 3 (query available simulators)
+3. Then Step 4 (prompt user to select a new simulator)
+4. Retry the build with the new simulator
 
 ### Step 6: Report results
 
