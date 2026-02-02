@@ -18,6 +18,11 @@
     },
     "release": {
       "gitMode": "auto"
+    },
+    "xcbuild": {
+      "scheme": null,
+      "simulatorId": null,
+      "showWarnings": true
     }
   }
 }

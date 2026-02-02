@@ -1,6 +1,6 @@
 # Release Toolkit Plugin For Claude Code
 
-[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
@@ -40,6 +40,7 @@ Release management is tedious. This plugin automates the repetitive parts:
 | `/release:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
 | `/release:decisions` | Capture decisions and proposals | `decisions.md` |
 | `/release:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
+| `/release:xcbuild` | Build iOS/macOS app with auto-detection | Build output with warnings/errors |
 
 > **Note**: Commands are namespaced with `release:` prefix when installed via marketplace.
 
@@ -84,6 +85,14 @@ Or run any command standalone.
 - Creates `TestFlight/` folder structure
 - Tester-focused, actionable format
 - Stays within 4000 character limit
+
+### `/release:xcbuild`
+- Auto-detects `.xcworkspace` or `.xcodeproj` in current directory
+- Lists available schemes and recommends main app target
+- Queries available simulators and recommends latest iPhone Pro
+- Caches selections for fast subsequent builds
+- Persists settings to `.claude/config.json` (optional)
+- Arguments: `--change` (re-select), `--scheme=<name>`, `--id=<UUID>`
 
 ## Supported Project Types
 
@@ -154,6 +163,11 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
     },
     "release": {
       "gitMode": "auto"
+    },
+    "xcbuild": {
+      "scheme": "MyApp",
+      "simulatorId": "UUID",
+      "showWarnings": true
     }
   }
 }
@@ -166,6 +180,9 @@ Create `.claude/config.json` in your project (a sample is included). Settings ar
 | `followUp.*` | `"always"`, `"ask"`, `"never"` |
 | `onExisting` | `"prepend"`, `"replace"`, `"ask"` |
 | `gitMode` | `"auto"` (Claude runs git), `"manual"` (show commands only) |
+| `xcbuild.scheme` | Default scheme name to build |
+| `xcbuild.simulatorId` | Default simulator UUID |
+| `xcbuild.showWarnings` | `true` (show warnings), `false` (errors only) |
 
 When prompted for choices, you can save them to config for future runs.
 
