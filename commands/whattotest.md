@@ -20,23 +20,22 @@ Generate a WhatToTest document for TestFlight beta releases.
 
 2. **Check for existing WhatToTest files**:
 
-   Search for existing WhatToTest files in common locations:
-   - `./TestFlight/WhatToTest.txt`
-   - `./TestFlight/WhatToTest.en-US.txt` (or other locale variants like `.de.txt`, `.fr.txt`)
-   - `./WhatToTest.txt` or `./WhatToTest.en-US.txt` at project root
+   Search for existing WhatToTest files in `./TestFlight/`, checking in this order:
+   1. `WhatToTest.en-US.txt` (default)
+   2. Other locale variants (e.g., `.de.txt`, `.fr.txt`)
 
-   **If existing file(s) found**, use the same location and filename, then ask:
-   "WhatToTest file already exists. How should I handle it?"
-   1. Prepend new entry (keep history, newest at top)
-   2. Replace all (start fresh with only this release)
+   **If existing file(s) found**, use the same location and filename.
 
-   **If no existing file found**, ask the user:
-   "Where should I create the WhatToTest file?"
-   1. TestFlight folder (`./TestFlight/WhatToTest.en-US.txt`) - Recommended
-   2. Project root (`./WhatToTest.en-US.txt`)
-   3. Custom location (let user specify path and filename)
+   Check config for `release-plugin.whattotest.onExisting`:
+   - If `"prepend"`: Prepend new entry without asking
+   - If `"replace"`: Replace content without asking
+   - If `"ask"` (default): Prompt the user:
+     "WhatToTest file already exists. How should I handle it?"
+     1. Prepend new entry (keep history, newest at top) - Recommended
+     2. Replace all (start fresh with only this release)
 
-   Create the TestFlight folder if it doesn't exist and that location is chosen.
+   **If no existing file found**, create `./TestFlight/WhatToTest.en-US.txt`.
+   Create the `TestFlight/` folder if it doesn't exist.
 
 3. **Generate WhatToTest content** that is:
    - Concise and actionable for testers
@@ -80,7 +79,6 @@ When prepending, each release gets its own section separated by `---`.
 - Keep content under 4000 characters (TestFlight limit)
 - Focus on NEW or CHANGED functionality that needs testing
 - Localized filenames: `WhatToTest.en-US.txt` (US English), `WhatToTest.de.txt` (German), etc.
-- `WhatToTest.txt` (without locale) serves as fallback for all users
 
 ## Arguments
 

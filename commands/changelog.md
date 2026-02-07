@@ -156,10 +156,10 @@ Once the changelog is complete, ask the user about follow-up documentation:
    - Check config for `release-plugin.whattotest.enabled` setting
    - If not set, detect if this is an Xcode project by checking for: `.xcodeproj`, `.xcworkspace`, `Package.swift`, or `Podfile`
    - If Xcode project detected (or `enabled: true` in config):
-     - Ask: "Would you like me to generate TestFlight WhatToTest.txt from the public-facing summary?"
+     - Ask: "Would you like me to generate TestFlight WhatToTest from the public-facing summary?"
      - Offer to save preference: "Save this as default for this project?"
    - If not an Xcode project (and no config override), skip this prompt
-   - If yes, use the **Public User-Facing Summary** to generate WhatToTest.txt
+   - If yes, use the **Public User-Facing Summary** to generate WhatToTest.en-US.txt
    - Do not re-analyze - derive directly from the public summary
 
 ## Arguments
@@ -222,7 +222,7 @@ Check for `.claude/config.json` at project root. Look for settings under the **`
 **release-plugin.changelog.followUp.whattotest**: `"always"` | `"ask"` | `"never"`
 **release-plugin.decisions.outputPath**: `"./decisions.md"` | `"./docs/decisions.md"` | custom path
 **release-plugin.whattotest.enabled**: `"auto"` (detect Xcode project) | `true` | `false`
-**release-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.txt"` | `"./WhatToTest.txt"` | custom path
+**release-plugin.whattotest.outputPath**: `"./TestFlight/WhatToTest.en-US.txt"` | custom path
 **release-plugin.whattotest.onExisting**: `"prepend"` | `"replace"` | `"ask"`
 
 ### Persisting User Choices
