@@ -1,5 +1,18 @@
 # Release Notes
 
+## [1.3.3] - 2026-02-06
+
+### What's New
+- **Xcode Build Command** - New `/release:xcbuild` command to build iOS/macOS apps with automatic project and simulator detection
+
+### Improvements
+- **WhatToTest Defaults** - Output now defaults to `TestFlight/WhatToTest.en-US.txt` with configurable prepend/replace behavior
+- **Expanded Keywords** - Better discoverability with comprehensive keywords (semver, ci-cd, automation, etc.)
+- **Contributor Docs** - Added CONTRIBUTING.md and GitHub issue templates for bug reports and feature requests
+- **Marketplace Metadata** - Added marketplace description and tags for better discoverability
+
+---
+
 ## [1.2.0] - 2025-12-23
 
 ### What's New

@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Release automation plugins for Claude Code - SemVer versioning, changelogs, and CI/CD integration",
-    "version": "1.3.2"
+    "version": "1.3.3"
   },
   "plugins": [
     {
       "name": "release",
       "source": "./",
       "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
-      "version": "1.3.2",
+      "version": "1.3.3",
       "author": {
         "name": "Shawn Carrillo",
         "email": "release@shawn.co"

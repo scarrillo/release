@@ -1,5 +1,72 @@
 # Changelog
 
+## [1.3.3] - 2026-02-06
+
+#### WhatToTest Default Output and Prepend Behavior
+
+**Problem**: WhatToTest command used `WhatToTest.txt` as the default filename and didn't respect the `onExisting` config setting for prepend/replace behavior.
+
+**Solution**: Updated WhatToTest to default to `TestFlight/WhatToTest.en-US.txt` and respect the `release-plugin.whattotest.onExisting` config.
+
+**How It Works**:
+- Default output is now `./TestFlight/WhatToTest.en-US.txt` (localized)
+- Removed non-localized `WhatToTest.txt` option and project root location
+- `onExisting` config: `"prepend"` (auto), `"replace"` (auto), or `"ask"` (default, with prepend recommended)
+- All doc commands (changelog, decisions, whattotest) now default to prepend
+
+**Files Changed**:
+- `commands/whattotest.md` - Updated default path, removed WhatToTest.txt, added onExisting config support
+- `commands/changelog.md` - Fixed stale WhatToTest.txt references in config section
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
+#### Xcode Build Command
+
+**Problem**: No way to build iOS/macOS projects from within the plugin workflow.
+
+**Solution**: Added `/release:xcbuild` command for building with xcodebuild, with auto-detection of projects and simulators.
+
+**How It Works**:
+- Auto-detects `.xcworkspace` or `.xcodeproj` in current directory
+- Lists available schemes and recommends main app target
+- Queries available simulators and recommends latest iPhone Pro
+- Caches scheme to `.claude/config.json` and simulator to `.claude/config.local.json`
+- Arguments: `--change` (re-select), `--scheme=<name>`, `--id=<UUID>`
+
+**Files Changed**:
+- `commands/xcbuild.md` - New build command
+- `README.md` - Added xcbuild to commands table and config section
+
+**Dependencies**: Requires Xcode and xcodebuild CLI
+
+**Known Issues**: None
+
+---
+
+#### Plugin Metadata and Contributor Docs
+
+**Problem**: Plugin was missing marketplace metadata, had incorrect author field (`url` instead of `email`), limited keywords, and no contributor documentation.
+
+**Solution**: Added marketplace metadata, expanded keywords, fixed author fields, and added CONTRIBUTING.md and GitHub issue templates.
+
+**Files Changed**:
+- `.claude-plugin/plugin.json` - Fixed author.email, expanded keywords (22 total)
+- `.claude-plugin/marketplace.json` - Added metadata section, expanded keywords, added tags
+- `CONTRIBUTING.md` - New contributor guidelines
+- `.github/ISSUE_TEMPLATE/bug_report.md` - New bug report template
+- `.github/ISSUE_TEMPLATE/feature_request.md` - New feature request template
+- `README.md` - Updated title, version badge
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
 ## [1.2.0] - 2025-12-23
 
 #### Claude Plugin Release Support

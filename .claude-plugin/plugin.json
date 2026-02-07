@@ -1,6 +1,6 @@
 {
   "name": "release",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
   "author": {
     "name": "Shawn Carrillo",
