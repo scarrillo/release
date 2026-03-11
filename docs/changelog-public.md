@@ -1,5 +1,13 @@
 # Release Notes
 
+## [1.3.4] - 2026-03-11
+
+### Improvements
+- **WhatToTest Character Limit** - TestFlight WhatToTest content is now enforced to stay under 4000 characters to prevent failed builds
+- **Plain ASCII Only** - WhatToTest output now avoids special characters and unicode that can cause build failures
+
+---
+
 ## [1.3.3] - 2026-02-06
 
 ### What's New

@@ -38,6 +38,8 @@ Generate a WhatToTest document for TestFlight beta releases.
    Create the `TestFlight/` folder if it doesn't exist.
 
 3. **Generate WhatToTest content** that is:
+   - **Under 4000 characters total** (hard limit — TestFlight rejects content exceeding this). Count characters before writing the file. If over, condense until it fits.
+   - **No special characters** — use only plain ASCII. Avoid smart quotes, em dashes, bullets (•), or other unicode characters. Use hyphens (-) for lists and straight quotes.
    - Concise and actionable for testers
    - Focused on what testers should specifically test
    - Written in plain language (non-technical)

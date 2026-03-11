@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.3.4] - 2026-03-11
+
+#### WhatToTest Content Validation Rules
+
+**Problem**: WhatToTest output could exceed TestFlight's 4000-character limit or contain special/unicode characters that TestFlight doesn't handle well, leading to failed builds.
+
+**Solution**: Added two hard rules to the WhatToTest generation instructions: a 4000-character limit with mandatory pre-write character counting, and a plain ASCII requirement that prohibits smart quotes, em dashes, bullet characters, and other unicode.
+
+**How It Works**:
+- Character count must be verified before writing the file; if over 4000, content is condensed until it fits
+- Only plain ASCII allowed — hyphens for lists, straight quotes, no unicode characters
+- Both rules are enforced as generation constraints, not just advisory notes
+
+**Files Changed**:
+- `commands/whattotest.md` - Added hard 4000-character limit and plain ASCII rules to generation instructions
+
+**Dependencies**: None
+
+**Known Issues**: None
+
+---
+
 ## [1.3.3] - 2026-02-06
 
 #### WhatToTest Default Output and Prepend Behavior
