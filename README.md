@@ -24,11 +24,11 @@ Release management is tedious. This plugin automates the repetitive parts:
 
 ## Installation
 
-Install from the [scarrillo marketplace](https://github.com/scarrillo/agents-plugins), which also carries my other Claude Code plugins:
+Install from the [scarrillo marketplace](https://github.com/scarrillo/agent-plugins), which also carries my other Claude Code plugins:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add scarrillo/agents-plugins
+/plugin marketplace add scarrillo/agent-plugins
 
 # Install the plugin
 /plugin install release@scarrillo
