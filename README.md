@@ -1,6 +1,6 @@
 # Release Toolkit Plugin For Claude Code
 
-[![Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/version-1.3.4-blue.svg)](https://github.com/scarrillo/release/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
@@ -24,13 +24,24 @@ Release management is tedious. This plugin automates the repetitive parts:
 
 ## Installation
 
+Install from the [scarrillo marketplace](https://github.com/scarrillo/agents-plugins), which also carries my other Claude Code plugins:
+
 ```bash
 # Add the marketplace
-/plugin marketplace add scarrillo/release
+/plugin marketplace add scarrillo/agents-plugins
 
 # Install the plugin
 /plugin install release@scarrillo
 ```
+
+Or add this repo on its own, as its own marketplace:
+
+```bash
+/plugin marketplace add scarrillo/release
+/plugin install release@scarrillo-release
+```
+
+Install from one marketplace or the other, not both, or the plugin loads twice.
 
 ## Commands
 
