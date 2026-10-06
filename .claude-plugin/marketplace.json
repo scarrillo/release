@@ -5,14 +5,14 @@
     "email": "release@shawn.co"
   },
   "metadata": {
-    "description": "Release automation plugins for Claude Code - SemVer versioning, changelogs, and CI/CD integration",
+    "description": "Xcode release automation for Claude Code: SemVer, changelogs, TestFlight notes, and tags that trigger CI/CD (e.g. Xcode Cloud)",
     "version": "1.3.4"
   },
   "plugins": [
     {
       "name": "release",
       "source": "./",
-      "description": "Release automation toolkit - semantic versioning, changelogs, decisions tracking, and TestFlight integration",
+      "description": "Xcode release automation for Claude Code: SemVer bumps and tags, changelogs, decisions tracking and TestFlight notes for iOS/macOS apps",
       "version": "1.3.4",
       "author": {
         "name": "Shawn Carrillo",

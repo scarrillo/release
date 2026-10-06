@@ -1,26 +1,23 @@
-# Release Toolkit Plugin For Claude Code
+# Xcode Release Automation for Claude Code
 
-[![Version](https://img.shields.io/badge/version-1.3.4-blue.svg)](https://github.com/scarrillo/release/releases)
+[![Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fscarrillo%2Frelease%2Fmain%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&color=blue)](https://github.com/scarrillo/release/tags)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-A Claude Code plugin for release automation. Semantic versioning, changelogs, architectural decisions, and TestFlight integration.
+Release your iOS and macOS apps from Claude Code: bump the version, tag, write the changelog and TestFlight notes, and build, in a few commands. Also releases Claude Code plugins.
 
 ## Why Use This?
 
-Release management is tedious. This plugin automates the repetitive parts:
+Shipping an iOS/macOS build is the same chore every time. This plugin automates the repetitive parts:
 
 - **Version Management** - Increment versions per SemVer, commit, and tag in one command
 - **Changelogs** - Problem/Solution format from your session, not vague commit messages
 - **Decisions** - Capture the "why" behind choices, even ones you didn't implement
 - **TestFlight notes** - Beta tester instructions derived directly from your changelog
 
-## About
-
-> **Renamed from "Changelog Plugin"** - Now a comprehensive release toolkit with semantic versioning, changelogs, and more. Commands are now namespaced under `release:` (e.g., `/release:changelog`).
-
 ## Requirements
 
 - [Claude Code](https://claude.ai/code) CLI
+- An Xcode project (iOS/macOS), or a Claude Code plugin
 
 ## Installation
 
