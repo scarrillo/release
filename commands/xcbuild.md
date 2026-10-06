@@ -1,10 +1,10 @@
 ---
-description: Build iOS/macOS app using xcodebuild with automatic project and simulator detection
+description: Build an iOS app for the iOS Simulator using xcodebuild with automatic project and simulator detection
 ---
 
 # Xcode Build
 
-Build an iOS/macOS app using xcodebuild with automatic project detection and simulator selection.
+Build an iOS app for the iOS Simulator using xcodebuild, with automatic project detection and simulator selection.
 
 ## Arguments
 

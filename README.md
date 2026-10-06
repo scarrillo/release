@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fscarrillo%2Frelease%2Fmain%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&color=blue)](https://github.com/scarrillo/release/tags)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-Release your iOS and macOS apps from Claude Code: bump the version, tag, write the changelog and TestFlight notes, and build, in a few commands. Also releases Claude Code plugins.
+Release your iOS and macOS apps from Claude Code: bump the version, tag, write the changelog and TestFlight notes, and build for the iOS Simulator, in a few commands. Also releases Claude Code plugins.
 
 ## Why Use This?
 
@@ -48,7 +48,7 @@ Install from one marketplace or the other, not both, or the plugin loads twice.
 | `/release:changelog` | Generate changelog from session work | `changelog.md` + `changelog-public.md` |
 | `/release:decisions` | Capture decisions and proposals | `decisions.md` |
 | `/release:whattotest` | Generate TestFlight testing guide | `TestFlight/WhatToTest.en-US.txt` |
-| `/release:xcbuild` | Build iOS/macOS app with auto-detection | Build output with warnings/errors |
+| `/release:xcbuild` | Build an iOS app for the Simulator with auto-detection | Build output with warnings/errors |
 
 > **Note**: Commands are namespaced with `release:` prefix when installed via marketplace.
 
